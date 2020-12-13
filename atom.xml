@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>HCHAN</title>
+  
+  <subtitle>HCHAN</subtitle>
+  <link href="https://github.com/HChan-X/HChan-X.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://github.com/HChan-X/HChan-X.github.io/"/>
+  <updated>2020-12-13T06:55:18.489Z</updated>
+  <id>https://github.com/HChan-X/HChan-X.github.io/</id>
+  
+  <author>
+    <name>HCHAN</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>第一篇博客，作为自己博客记录的开头吧！</title>
+    <link href="https://github.com/HChan-X/HChan-X.github.io/2020/12/13/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%EF%BC%8C%E4%BD%9C%E4%B8%BA%E8%87%AA%E5%B7%B1%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95%E7%9A%84%E5%BC%80%E5%A4%B4%E5%90%A7%EF%BC%81/"/>
+    <id>https://github.com/HChan-X/HChan-X.github.io/2020/12/13/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%EF%BC%8C%E4%BD%9C%E4%B8%BA%E8%87%AA%E5%B7%B1%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95%E7%9A%84%E5%BC%80%E5%A4%B4%E5%90%A7%EF%BC%81/</id>
+    <published>2020-12-12T17:27:22.948Z</published>
+    <updated>2020-12-13T06:55:18.489Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr><p>从严格意义上来讲呢，这是我的第一篇博客！</p><p>从上大学接触<code>HelloWorld</code>的那一刻开始，就开启了和代码打交到的旅程了；至今天是我在这趟旅途的第两个半的年头，回想起走过的这一段旅途，缺少了奋发向上的风景。一遇到难题就是想着如何去逃避，不敢去面对，松散的过着本该是充满活力的生活；从这一篇博客开始，将踏上新的旅程。</p><p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/background/7.jpg"></p><h1 id="为什么想要写博客"><a href="#为什么想要写博客" class="headerlink" title="为什么想要写博客"></a>为什么想要写博客</h1><hr><p>这个想法源于我的室友，我了解到写博客能将自己的所见所想所学，以字面的形式记录下来，可以使现在，更是以后的自己有机会审视到自己的成长，从而从中取得更为长足的进步。好处很多，但是主要的还是：</p><ul><li><h3 id="可以作为一个学习记录"><a href="#可以作为一个学习记录" class="headerlink" title="可以作为一个学习记录"></a><strong>可以作为一个学习记录</strong></h3><p>很多时候我们花了很多时间找了N多教程才解决一个问题，当时可能对于这个问题已经看的明明白白的了，在接下来的一小段时间遇到同样的问题，还是能够清楚如何去解决的，但是过了很久很久之后再次遇到同样的问题，这时我们就可能会发现这个问题变成了一个全新的问题。写博客可以作为一个学习记录，而且还能用于复习。</p></li></ul><ul><li><h3 id="促进自己学习"><a href="#促进自己学习" class="headerlink" title="促进自己学习"></a><strong>促进自己学习</strong></h3><p>当我们开始写博客之后，就会把写一篇有用的博客这件事放在一件比较重要的位置，而写有用博客的前提是有一定的知识技术储备，如果没有知识和技术，就没法去写好一篇好的博客，在这个原因的驱动下，我们会去学更多的东西，来丰富自己的知识面。</p></li><li><h3 id="和别人一同分享交流"><a href="#和别人一同分享交流" class="headerlink" title="和别人一同分享交流"></a><strong>和别人一同分享交流</strong></h3><p>相信很多学生（包括我）在学程序的时候，遇到技术难题的第一个反应就是上网找解决方案，但是我们会发现，很多都是源于CSDN或者是博客园上的博主，他们之所以会想那一篇文章，也是因为他们也遇到同样的问题，而他们把问题的解决方案通过博客分享给了其他人，相信他们的目的是同别人一同分享就交流，一起进步。</p></li></ul><h1 id="最后，分享一波鸡汤"><a href="#最后，分享一波鸡汤" class="headerlink" title="最后，分享一波鸡汤"></a>最后，分享一波鸡汤</h1><hr><blockquote><p><strong>人生的价值，即以其人对于当代所做的工作为尺度。——徐伟</strong></p></blockquote><blockquote><p><strong>人生最大的光荣，不在于永不失败，而在于能屡仆屡起。——拿破仑</strong></p></blockquote><blockquote><p><strong>坚强的信念能赢得强者的心，并使他们变得更加坚强。——白哲特</strong></p></blockquote><blockquote><p><strong>勿问成功的秘诀为何，且尽全力做你应该做的事吧。——美划钠</strong></p></blockquote><blockquote><p><strong>只有把抱怨环境的心情，化为上进的力量，才是成功的保证。——罗曼·罗兰</strong></p></blockquote><p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/background/8.jpg"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;从严格意义上来讲呢，这是我的第一篇博客！&lt;/p&gt;
+&lt;p&gt;从上大学接触&lt;code&gt;HelloWorld&lt;/code&gt;的那一刻开始，就</summary>
+      
+    
+    
+    
+    <category term="日常" scheme="https://github.com/HChan-X/HChan-X.github.io/categories/%E6%97%A5%E5%B8%B8/"/>
+    
+    <category term="记录" scheme="https://github.com/HChan-X/HChan-X.github.io/categories/%E6%97%A5%E5%B8%B8/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://github.com/HChan-X/HChan-X.github.io/2020/12/12/hello-world/"/>
+    <id>https://github.com/HChan-X/HChan-X.github.io/2020/12/12/hello-world/</id>
+    <published>2020-12-12T03:42:19.383Z</published>
+    <updated>2020-12-12T03:42:19.383Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
