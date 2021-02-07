@@ -6,7 +6,7 @@
   <link href="https://github.com/HChan-X/HChan-X.github.io/atom.xml" rel="self"/>
   
   <link href="https://github.com/HChan-X/HChan-X.github.io/"/>
-  <updated>2020-12-13T06:55:18.489Z</updated>
+  <updated>2021-02-07T12:07:54.158Z</updated>
   <id>https://github.com/HChan-X/HChan-X.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue学习笔记01</title>
+    <link href="https://github.com/HChan-X/HChan-X.github.io/2021/02/07/vue01/"/>
+    <id>https://github.com/HChan-X/HChan-X.github.io/2021/02/07/vue01/</id>
+    <published>2021-02-07T11:42:18.000Z</published>
+    <updated>2021-02-07T12:07:54.158Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="第一个Vue程序"><a href="#第一个Vue程序" class="headerlink" title="第一个Vue程序"></a>第一个Vue程序</h1><h4 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h4><p>  Vue (读音/vju/, 类似于view)是一套用于<strong>构建用户界面的渐进式框架</strong>，发布于2014年2月。与其它大型框架不同的是，Vue被设计为可以自底向上逐层应用。Vue的核心库只关注视图层，不仅易于上手，还便于与第三方库(如: vue-router, vue-resource, vuex)或既有项目整合。</p><h4 id="MVVM模式的实现者"><a href="#MVVM模式的实现者" class="headerlink" title="MVVM模式的实现者"></a>MVVM模式的实现者</h4><p>●Model:模型层，在这里表示JavaScript对象<br>●View:视图层,在这里表示DOM (HTML操作的元素)<br>●ViewModel:连接视图和数据的中间件，Vue.js就是MVVM中的ViewModel层的实现者<br>在MVVM架构中，是不允许数据和视图直接通信的，只能通过ViewModel来通信，而<br>ViewModel就是定义了一个Observer观察者<br>●ViewModel能够观察到数据的变化，并对视图对应的内容进行更新<br>●ViewModel能够监听到视图的变化，并能够通知数据发生改变<br><strong>综上，Vue.js 就是一个MVVM的实现者，他的核心就是实现了DOM监听与数据绑定</strong></p><h4 id="为什么要使用Vue-js"><a href="#为什么要使用Vue-js" class="headerlink" title="为什么要使用Vue.js"></a>为什么要使用Vue.js</h4><p>●轻量级，体积小是一个重要指标。Vue.js 压缩后有只有20多kb (Angular 压缩后56kb+ ,<br>React压缩后44kb+ )<br>●移动优先。更适合移动端，比如移动端的Touch事件<br>●易上手，学习曲线平稳,文档齐全<br><strong>●吸取了Angular (模块化)和React (虚拟DOM)的长处，并拥有自己独特的功能，如:计算属性</strong><br>●开源，社区活跃度高</p><hr><h4 id="什么是MVVM？"><a href="#什么是MVVM？" class="headerlink" title="什么是MVVM？"></a>什么是MVVM？</h4><p><strong>MVVM</strong> 是Model-View-ViewModel（模型-视图-视图模型） 的缩写，是一种基于前端开发的架构模式，其<strong>核心是提供对View 和 ViewModel 的双向数据绑定，这使得ViewModel 的状态改变可以自动传递给 View，即所谓的数据双向绑定</strong>。</p><ul><li>Model：代表数据模型，数据和业务逻辑都在Model层中定义</li><li>View：代表UI视图，负责数据显示</li><li>ViewModel：负责监听Model中数据的改变并且控制视图的更新</li></ul><p>它有两个方向：一是将【模型】转化成【视图】，即将后端传递的数据转化成所看到的页面。实现的方式是：数据绑定。二是将【视图】转化成【模型】，即将所看到的页面转化成后端的数据。实现的方式是：DOM 事件监听。</p><p><strong>总结：</strong> <strong>MVVM模式简化了界面与业务的依赖，解决了数据频繁更新。MVVM 在使用当中，利用双向绑定技术，使得 Model 变化时，ViewModel 会自动更新，而 ViewModel 变化时，View 也会自动变化。</strong></p><p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/mvvm.jpg"></p><h4 id="为什么要使用MVVM？"><a href="#为什么要使用MVVM？" class="headerlink" title="为什么要使用MVVM？"></a>为什么要使用MVVM？</h4><p>MVVM模式和MVC模式一样，主要目的是<strong>分离视图(View)\</strong>和**模型(Model)**,有几大好处<br>●低耦合:视图(View)可以独立于Model变化和修改,一个ViewModel可以绑定到不同的<br>View上，当View变化的时候Model可以不变，当Model变化的时候View也可以不变。<br>●可复用:你可以把一些视图逻辑放在一个ViewModel里面，让很多View重用这段视图逻辑。<br>●独立开发:开发人员可以专注于业务逻辑和数据的开发(ViewModel),设计人员可以专注于页面设计。<br>●可测试:界面素来是比较难于测试的，而现在测试可以针对ViewModel来写。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;第一个Vue程序&quot;&gt;&lt;a href=&quot;#第一个Vue程序&quot; class=&quot;headerlink&quot; title=&quot;第一个Vue程序&quot;&gt;&lt;/a&gt;第一个Vue程序&lt;/h1&gt;&lt;h4 id=&quot;Vue&quot;&gt;&lt;a href=&quot;#Vue&quot; class=&quot;headerlink&quot; ti</summary>
+      
+    
+    
+    
+    <category term="笔记" scheme="https://github.com/HChan-X/HChan-X.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="Vue" scheme="https://github.com/HChan-X/HChan-X.github.io/categories/%E7%AC%94%E8%AE%B0/Vue/"/>
+    
+    
+    <category term="Vue" scheme="https://github.com/HChan-X/HChan-X.github.io/tags/Vue/"/>
+    
+  </entry>
   
   <entry>
     <title>第一篇博客，作为自己博客记录的开头吧！</title>
