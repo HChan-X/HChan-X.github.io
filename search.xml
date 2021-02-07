@@ -45,6 +45,32 @@
       </tags>
   </entry>
   <entry>
+    <title>Vue学习笔记02</title>
+    <url>/HChan-X.github.io/2021/02/07/vue02/</url>
+    <content><![CDATA[<h4 id="Vue-js常见的使用方式有："><a href="#Vue-js常见的使用方式有：" class="headerlink" title="Vue.js常见的使用方式有："></a>Vue.js常见的使用方式有：</h4><ul>
+<li>直接引入，通过script标签引入完整的vue文件</li>
+<li>webpack自定义打包</li>
+<li>vue-cli脚手架，也是通过webpack进行打包</li>
+</ul>
+<hr>
+<h4 id="Vue-的目标是通过尽可能简单的-API-实现响应的数据绑定和组合的视图组件"><a href="#Vue-的目标是通过尽可能简单的-API-实现响应的数据绑定和组合的视图组件" class="headerlink" title="Vue 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件"></a><strong>Vue 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件</strong></h4><p><strong>响应的数据绑定：</strong>就是vue.js会自动响应数据的变化情况，并且根据用户在代码中预先写好的绑定关系，对所有绑定在一起的数据和视图内容都进行修改</p>
+<p>代码 demo1.html Vue入门之绑定数据</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--view 层 模板--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-bind:title</span>=<span class="string">&quot;message&quot;</span>&gt;</span></span><br><span class="line">                鼠标悬停几秒钟查看此处动态绑定的提示信息！</span><br><span class="line">            <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--1.导入vue.js--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">                el:<span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line"><span class="javascript">                <span class="comment">//Model ： 数据</span></span></span><br><span class="line">                data:&#123;</span><br><span class="line"><span class="javascript">                    message: <span class="string">&quot;hello,vue!&quot;</span></span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用cdn的方式引入Vue完整文件</strong></p>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+
+<p>demo1中的绑定关系，是使用<code>span</code>标签中的<code>v-bind:title</code>属性来声明的。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第一篇博客，作为自己博客记录的开头吧！</title>
     <url>/HChan-X.github.io/2020/12/13/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%EF%BC%8C%E4%BD%9C%E4%B8%BA%E8%87%AA%E5%B7%B1%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95%E7%9A%84%E5%BC%80%E5%A4%B4%E5%90%A7%EF%BC%81/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
