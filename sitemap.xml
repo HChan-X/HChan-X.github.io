@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://github.com/HChan-X/HChan-X.github.io/2021/02/26/cloud1/</loc>
+    
+    <lastmod>2021-02-26</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://github.com/HChan-X/HChan-X.github.io/2021/02/19/vue12/</loc>
     
     <lastmod>2021-02-19</lastmod>
@@ -144,7 +151,7 @@
 
   <url>
     <loc>https://github.com/HChan-X/HChan-X.github.io</loc>
-    <lastmod>2021-02-19</lastmod>
+    <lastmod>2021-02-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -152,7 +159,14 @@
   
   <url>
     <loc>https://github.com/HChan-X/HChan-X.github.io/tags/Vue/</loc>
-    <lastmod>2021-02-19</lastmod>
+    <lastmod>2021-02-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://github.com/HChan-X/HChan-X.github.io/tags/SpringCloud/</loc>
+    <lastmod>2021-02-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -161,28 +175,35 @@
   
   <url>
     <loc>https://github.com/HChan-X/HChan-X.github.io/categories/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2021-02-19</lastmod>
+    <lastmod>2021-02-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/HChan-X/HChan-X.github.io/categories/%E7%AC%94%E8%AE%B0/Vue/</loc>
-    <lastmod>2021-02-19</lastmod>
+    <lastmod>2021-02-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/HChan-X/HChan-X.github.io/categories/%E6%97%A5%E5%B8%B8/</loc>
-    <lastmod>2021-02-19</lastmod>
+    <lastmod>2021-02-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://github.com/HChan-X/HChan-X.github.io/categories/%E7%AC%94%E8%AE%B0/SpringCloud/</loc>
+    <lastmod>2021-02-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/HChan-X/HChan-X.github.io/categories/%E6%97%A5%E5%B8%B8/%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2021-02-19</lastmod>
+    <lastmod>2021-02-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
