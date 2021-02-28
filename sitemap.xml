@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://HChan-X@github.com/HChan-X/HChan-X.github.io.git/2021/02/28/cloud3/</loc>
+    
+    <lastmod>2021-02-28</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://HChan-X@github.com/HChan-X/HChan-X.github.io.git/2021/02/28/cloud2/</loc>
     
     <lastmod>2021-02-28</lastmod>
@@ -165,14 +172,14 @@
 
   
   <url>
-    <loc>https://HChan-X@github.com/HChan-X/HChan-X.github.io.git/tags/Vue/</loc>
+    <loc>https://HChan-X@github.com/HChan-X/HChan-X.github.io.git/tags/SpringCloud/</loc>
     <lastmod>2021-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://HChan-X@github.com/HChan-X/HChan-X.github.io.git/tags/SpringCloud/</loc>
+    <loc>https://HChan-X@github.com/HChan-X/HChan-X.github.io.git/tags/Vue/</loc>
     <lastmod>2021-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -195,6 +202,13 @@
   </url>
   
   <url>
+    <loc>https://HChan-X@github.com/HChan-X/HChan-X.github.io.git/categories/%E7%AC%94%E8%AE%B0/SpringCloud/</loc>
+    <lastmod>2021-02-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://HChan-X@github.com/HChan-X/HChan-X.github.io.git/categories/%E6%97%A5%E5%B8%B8/</loc>
     <lastmod>2021-02-28</lastmod>
     <changefreq>daily</changefreq>
@@ -203,13 +217,6 @@
   
   <url>
     <loc>https://HChan-X@github.com/HChan-X/HChan-X.github.io.git/categories/%E6%97%A5%E5%B8%B8/%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2021-02-28</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://HChan-X@github.com/HChan-X/HChan-X.github.io.git/categories/%E7%AC%94%E8%AE%B0/SpringCloud/</loc>
     <lastmod>2021-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

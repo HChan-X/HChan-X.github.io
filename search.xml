@@ -1,29 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Vue笔记：第一个Vue程序(上)</title>
-    <url>/HChan-X.github.io/2021/02/07/vue01/</url>
-    <content><![CDATA[<h1 id="第一个Vue程序"><a href="#第一个Vue程序" class="headerlink" title="第一个Vue程序"></a>第一个Vue程序</h1><h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><p>  Vue (读音/vju/, 类似于view)是一套用于<strong>构建用户界面的渐进式框架</strong>，发布于2014年2月。与其它大型框架不同的是，Vue被设计为可以自底向上逐层应用。Vue的核心库只关注视图层，不仅易于上手，还便于与第三方库(如: vue-router, vue-resource, vuex)或既有项目整合。</p>
-<h2 id="MVVM模式的实现者"><a href="#MVVM模式的实现者" class="headerlink" title="MVVM模式的实现者"></a>MVVM模式的实现者</h2><p>●Model:模型层，在这里表示JavaScript对象<br>●View:视图层,在这里表示DOM (HTML操作的元素)<br>●ViewModel:连接视图和数据的中间件，Vue.js就是MVVM中的ViewModel层的实现者<br>在MVVM架构中，是不允许数据和视图直接通信的，只能通过ViewModel来通信，而<br>ViewModel就是定义了一个Observer观察者<br>●ViewModel能够观察到数据的变化，并对视图对应的内容进行更新<br>●ViewModel能够监听到视图的变化，并能够通知数据发生改变<br><strong>综上，Vue.js 就是一个MVVM的实现者，他的核心就是实现了DOM监听与数据绑定</strong></p>
-<h2 id="为什么要使用Vue-js"><a href="#为什么要使用Vue-js" class="headerlink" title="为什么要使用Vue.js"></a>为什么要使用Vue.js</h2><p>●轻量级，体积小是一个重要指标。Vue.js 压缩后有只有20多kb (Angular 压缩后56kb+ ,<br>React压缩后44kb+ )<br>●移动优先。更适合移动端，比如移动端的Touch事件<br>●易上手，学习曲线平稳,文档齐全<br><strong>●吸取了Angular (模块化)和React (虚拟DOM)的长处，并拥有自己独特的功能，如:计算属性</strong><br>●开源，社区活跃度高</p>
-<hr>
-<h2 id="什么是MVVM？"><a href="#什么是MVVM？" class="headerlink" title="什么是MVVM？"></a>什么是MVVM？</h2><p><strong>MVVM</strong> 是Model-View-ViewModel（模型-视图-视图模型） 的缩写，是一种基于前端开发的架构模式，其<strong>核心是提供对View 和 ViewModel 的双向数据绑定，这使得ViewModel 的状态改变可以自动传递给 View，即所谓的数据双向绑定</strong>。</p>
+    <title>SpringCloud笔记：服务注册中心之Zookeeper&amp;Consul</title>
+    <url>/HChan-X.github.io/2021/02/28/cloud3/</url>
+    <content><![CDATA[<h1 id="服务注册中心"><a href="#服务注册中心" class="headerlink" title="服务注册中心"></a>服务注册中心</h1><h2 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h2><blockquote>
+<p>springCloud 整合 zookeeper </p>
 <ul>
-<li>Model：代表数据模型，数据和业务逻辑都在Model层中定义</li>
-<li>View：代表UI视图，负责数据显示</li>
-<li>ViewModel：负责监听Model中数据的改变并且控制视图的更新</li>
+<li>zookeeper是一个分布式协调工具，可以实现中心功能</li>
+<li>测试时先关闭linux服务器防火墙后再启动zookeeper服务器</li>
+<li>zookeeper服务器取代Eureka服务器，zookeeper作为服务中心</li>
 </ul>
-<p>它有两个方向：一是将【模型】转化成【视图】，即将后端传递的数据转化成所看到的页面。实现的方式是：数据绑定。二是将【视图】转化成【模型】，即将所看到的页面转化成后端的数据。实现的方式是：DOM 事件监听。</p>
-<p><strong>总结：</strong> <strong>MVVM模式简化了界面与业务的依赖，解决了数据频繁更新。MVVM 在使用当中，利用双向绑定技术，使得 Model 变化时，ViewModel 会自动更新，而 ViewModel 变化时，View 也会自动变化。</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/mvvm.jpg"></p>
-<h2 id="为什么要使用MVVM？"><a href="#为什么要使用MVVM？" class="headerlink" title="为什么要使用MVVM？"></a>为什么要使用MVVM？</h2><p>MVVM模式和MVC模式一样，主要目的是<strong>分离视图(View)\</strong>和**模型(Model)**,有几大好处<br>●低耦合:视图(View)可以独立于Model变化和修改,一个ViewModel可以绑定到不同的<br>View上，当View变化的时候Model可以不变，当Model变化的时候View也可以不变。<br>●可复用:你可以把一些视图逻辑放在一个ViewModel里面，让很多View重用这段视图逻辑。<br>●独立开发:开发人员可以专注于业务逻辑和数据的开发(ViewModel),设计人员可以专注于页面设计。<br>●可测试:界面素来是比较难于测试的，而现在测试可以针对ViewModel来写。</p>
+</blockquote>
+<h3 id="提供者"><a href="#提供者" class="headerlink" title="提供者"></a>提供者</h3><blockquote>
+<p>创建一个提供者，和之前的一样即可，使用 8004端口</p>
+</blockquote>
+<p>pom文件如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cloud-provider-payment8004<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span><span class="comment">&lt;!--引入自己定义的api通用包，可以使用Payment 支付 Entity--&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.xhc.springcloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cloud-api-commons<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--SpringBoot整合zookeeper客户端--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-zookeeper-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="comment">&lt;!--先排除自带的zookeeper3.5.3--&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.zookeeper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zookeeper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--添加zookeeper3.4.9版本--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.zookeeper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zookeeper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>主启动类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.client.discovery.EnableDiscoveryClient;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span>	</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentMain8004</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        SpringApplication.run(PaymentMain8004.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Controller 打印信息：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> PaymentService paymentService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;server.port&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String serverPort;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/payment/zk&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">paymentzk</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;springcloud with zookeeper :&quot;</span> + serverPort + <span class="string">&quot;\t&quot;</span> + UUID.randomUUID().toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果 zookeeper 的版本和导入的jar包版本不一致，启动就会报错，由jar包冲突的问题。</strong></p>
+<p><strong>解决这种冲突，需要在 pom 文件中，排除掉引起冲突的jar包，添加和服务器zookeeper版本一致的 jar 包，</strong></p>
+<p><strong>但是新导入的 zookeeper jar包 又有 slf4j 冲突问题，于是再次排除引起冲突的jar包</strong></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--springcloud 整合 zookeeper 组件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-zookeeper-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 排除与zookeeper版本不一致到导致 冲突的 jar包 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.zookeeper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zookeeper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 添加对应版本的jar包 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.zookeeper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zookeeper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 排除和 slf4j 冲突的 jar包 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>yml文件：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8004</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">cloud-provider-service</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">zookeeper:</span></span><br><span class="line">      <span class="attr">connect-string:</span> <span class="number">192.168</span><span class="number">.40</span><span class="number">.100</span><span class="string">:2181</span></span><br></pre></td></tr></table></figure>
+
+<p>启动测试：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/eureka/zk1.png"></p>
+<h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><blockquote>
+<p>创建测试zookeeper作为服务注册中心的 消费者 模块 cloud-customerzk-order80</p>
+<p>主启动类、pom文件、yml文件和提供者的类似</p>
+</blockquote>
+<p>config类，注入 RestTemplate</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationContextConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@LoadBalanced</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RestTemplate <span class="title">getTemplate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>controller层也是和之前类似：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomerZkController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String INVOKE_URL=<span class="string">&quot;http://cloud-provider-service&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/customer/payment/zk&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">paymentInfo</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String result = restTemplate.getForObject(INVOKE_URL + <span class="string">&quot;/payment/zk&quot;</span>,String.class);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关于 zookeeper 的集群搭建，目前使用较少，而且在 yml 文件中的配置也是类似，以列表形式写入 zookeeper 的多个地址即可，而且zookeeper 集群，在 hadoop的笔记中也有记录。总而言之，只要配合zookeeper集群，以及yml文件的配置就能完成集群搭建,。</p>
+<p>**问题:**zookeeper中的节点是持久还是临时的？</p>
+<p><strong>答</strong>：临时的。</p>
+<h2 id="Consul"><a href="#Consul" class="headerlink" title="Consul"></a>Consul</h2><blockquote>
+<p><strong>Consul是什么</strong></p>
+<p>Consul是一个服务网格（微服务间的 TCP/IP，负责服务之间的网络调用、限流、熔断和监控）解决方案，它是一个一个分布式的，高度可用的系统，而且开发使用都很简便。它提供了一个功能齐全的控制平面，主要特点是：服务发现、健康检查、键值存储、安全服务通信、多数据中心。</p>
+<p>与其它分布式服务注册与发现的方案相比，Consul 的方案更“一站式”——内置了服务注册与发现框架、分布一致性协议实现、健康检查、Key/Value 存储、多数据中心方案，不再需要依赖其它工具。Consul 本身使用 go 语言开发，具有跨平台、运行高效等特点，也非常方便和 Docker 配合使用。</p>
+<p>官网地址： <a href="https://www.consul.io/intro">https://www.consul.io/intro</a> </p>
+<p>中文地址： <a href="https://www.springcloud.cc/spring-cloud-consul.html">https://www.springcloud.cc/spring-cloud-consul.html</a> </p>
+</blockquote>
+<h3 id="安装并运行"><a href="#安装并运行" class="headerlink" title="安装并运行"></a>安装并运行</h3><blockquote>
+<p> 下载地址：<a href="https://www.consul.io/downloads.html">https://www.consul.io/downloads.html</a></p>
+<p> 打开下载的压缩包，只有一个exe文件，实际上是不用安装的，在exe文件所在目录打开dos窗口使用即可。</p>
+<p> 使用开发模式启动：consul agent -dev</p>
+<p> 访问8500端口，即可访问首页</p>
+</blockquote>
+<h3 id="提供者-1"><a href="#提供者-1" class="headerlink" title="提供者"></a>提供者</h3><blockquote>
+<p>新建提供者模块：cloud-providerconsul-payment8006</p>
+</blockquote>
+<p>pom 文件：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cloud-providerconsul-payment8006<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span><span class="comment">&lt;!--引入自己定义的api通用包，可以使用Payment 支付 Entity--&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.xhc.springcloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cloud-api-commons<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--springcloud consul server--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-consul-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>yml 文件：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8006</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">consul-provider-payment</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">consul:</span></span><br><span class="line">      <span class="attr">host:</span> <span class="string">localhost</span></span><br><span class="line">      <span class="attr">port:</span> <span class="number">8500</span></span><br><span class="line">      <span class="attr">discovery:</span>    <span class="comment"># 指定注册对外暴露的服务名称</span></span><br><span class="line">        <span class="attr">service-name:</span> <span class="string">$&#123;spring.application.name&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>主启动类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentMain8006</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(PaymentMain8006.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>controller也简单</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;server.port&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String serverPort;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/payment/consul&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">paymentConsul</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;springcloud with consul: &quot;</span>+serverPort+<span class="string">&quot;\t&quot;</span>+ UUID.randomUUID().toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="消费者-1"><a href="#消费者-1" class="headerlink" title="消费者"></a>消费者</h3><blockquote>
+<p>新建 一个 在80端口的 消费者模块。pom和yml和提供者的类似，主启动类不用说，记得注入RestTemplate</p>
+</blockquote>
+<p>controller层：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderConsulController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String INVOKE_URL=<span class="string">&quot;http://consul-provider-payment&quot;</span>;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/consumer/payment/consul&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">paymentInfo</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String result=restTemplate.getForObject(INVOKE_URL+<span class="string">&quot;/payment/consul&quot;</span>,String.class);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="Eureka、Zookeeper、Consul三个注册中心的异同点"><a href="#Eureka、Zookeeper、Consul三个注册中心的异同点" class="headerlink" title="Eureka、Zookeeper、Consul三个注册中心的异同点"></a><strong>Eureka、Zookeeper、Consul三个注册中心的异同点</strong></h3><table>
+<thead>
+<tr>
+<th align="left">组件名</th>
+<th align="left">语言</th>
+<th align="left">健康检查</th>
+<th align="left">对外暴露接口</th>
+<th align="left">CAP</th>
+<th align="left">Spring Cloud 集成</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Eureka</td>
+<td align="left">Java</td>
+<td align="left">可配支持</td>
+<td align="left">HTTP</td>
+<td align="left">AP</td>
+<td align="left">集成</td>
+</tr>
+<tr>
+<td align="left">Consul</td>
+<td align="left">Go</td>
+<td align="left">支持</td>
+<td align="left">HTTP/DFS</td>
+<td align="left">CP</td>
+<td align="left">集成</td>
+</tr>
+<tr>
+<td align="left">Zookeeper</td>
+<td align="left">java</td>
+<td align="left">支持</td>
+<td align="left">客户端</td>
+<td align="left">CP</td>
+<td align="left">集成</td>
+</tr>
+</tbody></table>
+<h3 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h3><blockquote>
+<p>C:Consistency (强一致性)</p>
+<p>A:Availability (可用性)</p>
+<p>P:Partition tolerance (分区容错性)</p>
+<p>CAP理论关注粒度是数据，而不是整体系统设计的。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/eureka/zj.png"></p>
 ]]></content>
       <categories>
         <category>笔记</category>
-        <category>Vue</category>
+        <category>SpringCloud</category>
       </categories>
       <tags>
-        <tag>Vue</tag>
+        <tag>SpringCloud</tag>
       </tags>
   </entry>
   <entry>
@@ -145,40 +251,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue笔记：Axios异步通信</title>
-    <url>/HChan-X.github.io/2021/02/08/vue06/</url>
-    <content><![CDATA[<h2 id="Axios异步通信-通信框架"><a href="#Axios异步通信-通信框架" class="headerlink" title="Axios异步通信(通信框架)"></a>Axios异步通信(通信框架)</h2><p> Axios是一个开源的可以用在<strong>浏览器端</strong>和<strong>NodeJS</strong> 的<strong>异步通信框架</strong>，她的<strong>主要作用就是实现AJAX异步通信</strong>，其功能特点如下:<br>●从浏览器中创建XMLHttpRequests<br>●从node.js创建http请求<br>●支持Promise API [JS中链式编程]<br>●拦截请求和响应<br>●转换请求数据和响应数据<br>●取消请求<br>●自动转换JSON数据<br>●客户端支持防御XSRF (跨站请求伪造)</p>
-<blockquote>
-<p>GitHub: <a href="https://github.com/axios/axios">https://github.com/axios/axios</a><br>中文文档: <a href="http://www.axios-js.com/">http://www.axios-js.com/</a></p>
-</blockquote>
-<h2 id="为什么要使用Axios"><a href="#为什么要使用Axios" class="headerlink" title="为什么要使用Axios"></a>为什么要使用Axios</h2><p>由于Vue.js是一个视图层框架且作者(尤雨溪) 严格准守SoC (关注度分离原则)，所以Vue.js并不包含AJAX的通信功能，为了解决通信问题，作者单独开发了一个名为vue-resource的插件，不过在进入2.0 版本以后停止了对该插件的维护并推荐了Axios 框架。少用jQuery，因为它操作Dom太频繁!</p>
-<hr>
-<h2 id="Vue的生命周期"><a href="#Vue的生命周期" class="headerlink" title="Vue的生命周期"></a>Vue的生命周期</h2><blockquote>
-<p>官方文档: <a href="https://cn.vuejs.org/v2/guide/instance.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%BE%E7%A4%BA">https://cn.vuejs.org/v2/guide/instance.html#生命周期图示</a></p>
-</blockquote>
-<p>Vue实例有一个完整的生命周期，也就是从<strong>开始创建</strong>、<strong>初始化数据</strong>、<strong>编译模板</strong>、<strong>挂载DOM</strong>、渲染→更新→渲染、卸载等一系列过程，我们称这是Vue的生命周期。通俗说就是Vue实例从创建到销毁的过程，就是生命周期。<br>在Vue的整个生命周期中，它提供了一系列的事件，可以让我们在事件触发时注册JS方法,可以让我们用自己注册的JS方法控制整个大局，在这些事件响应方法中的this直接指向的是Vue的实例。</p>
-<p>代码 初探axios<br>先建立一个data.json</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;java&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;http://blog.mjean.space/&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;page&quot;</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">&quot;isNonProfit&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">&quot;address&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;street&quot;</span>: <span class="string">&quot;普宁&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;city&quot;</span>: <span class="string">&quot;揭阳&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;country&quot;</span>: <span class="string">&quot;中国&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;links&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;aaaa&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;www.baidu.com&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;bbbb&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;www.bilibili.com&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;cccc&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;www.7k7k.com&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>测试 demo7.html</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">        &lt;title&gt;Title&lt;&#x2F;title&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--解决闪烁问题--&gt;</span><br><span class="line">        &lt;style&gt;</span><br><span class="line">            [v-clock]&#123;</span><br><span class="line">                display: none;</span><br><span class="line">            &#125;</span><br><span class="line">        &lt;&#x2F;style&gt;</span><br><span class="line">    &lt;&#x2F;head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;div id&#x3D;&quot;vue&quot; v-clock&gt;</span><br><span class="line">            &lt;div&gt;&#123;&#123;info.name&#125;&#125;&lt;&#x2F;div&gt;</span><br><span class="line">            &lt;div&gt;&#123;&#123;info.address.street&#125;&#125;&lt;&#x2F;div&gt;</span><br><span class="line">            &lt;a v-bind:href&#x3D;&quot;info.url&quot;&gt;点我&lt;&#x2F;a&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--引入JS文件--&gt;</span><br><span class="line">        &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue@2.5.21&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">        &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;axios&#x2F;dist&#x2F;axios.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">        &lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;</span><br><span class="line">            var vm &#x3D; new Vue(&#123;</span><br><span class="line">                el: &#39;#vue&#39;,</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F;data: 属性</span><br><span class="line">                &#x2F;&#x2F;data()方法</span><br><span class="line">                data()&#123;</span><br><span class="line">                    return&#123;</span><br><span class="line">                        info: &#123;</span><br><span class="line">                            name: null,</span><br><span class="line">                            address: &#123;</span><br><span class="line">                                street: null,</span><br><span class="line">                                city: null,</span><br><span class="line">                                country: null</span><br><span class="line">                            &#125;,</span><br><span class="line">                            url: null</span><br><span class="line"></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                mounted()&#123;&#x2F;&#x2F;钩子函数 链式编程</span><br><span class="line">                    axios.get(&#39;..&#x2F;data.json&#39;).then(response&#x3D;&gt;(this.info&#x3D;response.data));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;)</span><br><span class="line">        &lt;&#x2F;script&gt;</span><br><span class="line">    &lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
-
-<p>说明:</p>
-<ol>
-<li>在这里使用了 v-bind 将 a:href 的属性值与 Vue 实例中的数据进行绑定</li>
-<li>使用 axios 框架的 get 方法请求 AJAX 并自动将数据封装进了 Vue 实例的数据对象中</li>
-<li>咱们在data中的数据结构必需要和Ajax响应回来的数据格式匹配！</li>
-</ol>
-]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>Vue</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue笔记：组件</title>
     <url>/HChan-X.github.io/2021/02/08/vue05/</url>
     <content><![CDATA[<h2 id="第一个Vue组件"><a href="#第一个Vue组件" class="headerlink" title="第一个Vue组件"></a>第一个Vue组件</h2><h4 id="什么是组件"><a href="#什么是组件" class="headerlink" title="什么是组件"></a>什么是组件</h4><p> 组件是可复用的Vue实例，说白了就是一组可以重复使用的模板，跟JSTL的自定义标签、Thymeleaf的th:fragment 等框架有着异曲同工之妙。通常一个应用会以一棵嵌套的组件树的形式来组织:<br> 注意:在实际开发中，我们并不会用以下方式开发组件，而是采用vue-cli创建.vue模板文件的方式开发，以下方法只是为了让大家理解什么是组件。</p>
@@ -205,6 +277,40 @@
 <li><code>v-for=&quot;item in items&quot;</code>：遍历 <code>Vue</code> 实例中定义的名为 <code>items</code> 的数组，并建立同等数量的组件</li>
 <li><code>v-bind:item=&quot;item&quot;</code>：将遍历的 <code>item</code> 项绑定到组件中 <code>props</code> 定义的名为 <code>item</code> 属性上；= 号左边的 item 为 props 定义的属性名，右边的为 <code>item in items</code> 中遍历的 item 项的值</li>
 </ul>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue笔记：Axios异步通信</title>
+    <url>/HChan-X.github.io/2021/02/08/vue06/</url>
+    <content><![CDATA[<h2 id="Axios异步通信-通信框架"><a href="#Axios异步通信-通信框架" class="headerlink" title="Axios异步通信(通信框架)"></a>Axios异步通信(通信框架)</h2><p> Axios是一个开源的可以用在<strong>浏览器端</strong>和<strong>NodeJS</strong> 的<strong>异步通信框架</strong>，她的<strong>主要作用就是实现AJAX异步通信</strong>，其功能特点如下:<br>●从浏览器中创建XMLHttpRequests<br>●从node.js创建http请求<br>●支持Promise API [JS中链式编程]<br>●拦截请求和响应<br>●转换请求数据和响应数据<br>●取消请求<br>●自动转换JSON数据<br>●客户端支持防御XSRF (跨站请求伪造)</p>
+<blockquote>
+<p>GitHub: <a href="https://github.com/axios/axios">https://github.com/axios/axios</a><br>中文文档: <a href="http://www.axios-js.com/">http://www.axios-js.com/</a></p>
+</blockquote>
+<h2 id="为什么要使用Axios"><a href="#为什么要使用Axios" class="headerlink" title="为什么要使用Axios"></a>为什么要使用Axios</h2><p>由于Vue.js是一个视图层框架且作者(尤雨溪) 严格准守SoC (关注度分离原则)，所以Vue.js并不包含AJAX的通信功能，为了解决通信问题，作者单独开发了一个名为vue-resource的插件，不过在进入2.0 版本以后停止了对该插件的维护并推荐了Axios 框架。少用jQuery，因为它操作Dom太频繁!</p>
+<hr>
+<h2 id="Vue的生命周期"><a href="#Vue的生命周期" class="headerlink" title="Vue的生命周期"></a>Vue的生命周期</h2><blockquote>
+<p>官方文档: <a href="https://cn.vuejs.org/v2/guide/instance.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%BE%E7%A4%BA">https://cn.vuejs.org/v2/guide/instance.html#生命周期图示</a></p>
+</blockquote>
+<p>Vue实例有一个完整的生命周期，也就是从<strong>开始创建</strong>、<strong>初始化数据</strong>、<strong>编译模板</strong>、<strong>挂载DOM</strong>、渲染→更新→渲染、卸载等一系列过程，我们称这是Vue的生命周期。通俗说就是Vue实例从创建到销毁的过程，就是生命周期。<br>在Vue的整个生命周期中，它提供了一系列的事件，可以让我们在事件触发时注册JS方法,可以让我们用自己注册的JS方法控制整个大局，在这些事件响应方法中的this直接指向的是Vue的实例。</p>
+<p>代码 初探axios<br>先建立一个data.json</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;java&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;http://blog.mjean.space/&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;page&quot;</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">&quot;isNonProfit&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">&quot;address&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;street&quot;</span>: <span class="string">&quot;普宁&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;city&quot;</span>: <span class="string">&quot;揭阳&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;country&quot;</span>: <span class="string">&quot;中国&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;links&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;aaaa&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;www.baidu.com&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;bbbb&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;www.bilibili.com&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;cccc&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;www.7k7k.com&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试 demo7.html</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">        &lt;title&gt;Title&lt;&#x2F;title&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--解决闪烁问题--&gt;</span><br><span class="line">        &lt;style&gt;</span><br><span class="line">            [v-clock]&#123;</span><br><span class="line">                display: none;</span><br><span class="line">            &#125;</span><br><span class="line">        &lt;&#x2F;style&gt;</span><br><span class="line">    &lt;&#x2F;head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;div id&#x3D;&quot;vue&quot; v-clock&gt;</span><br><span class="line">            &lt;div&gt;&#123;&#123;info.name&#125;&#125;&lt;&#x2F;div&gt;</span><br><span class="line">            &lt;div&gt;&#123;&#123;info.address.street&#125;&#125;&lt;&#x2F;div&gt;</span><br><span class="line">            &lt;a v-bind:href&#x3D;&quot;info.url&quot;&gt;点我&lt;&#x2F;a&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--引入JS文件--&gt;</span><br><span class="line">        &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue@2.5.21&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">        &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;axios&#x2F;dist&#x2F;axios.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">        &lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;</span><br><span class="line">            var vm &#x3D; new Vue(&#123;</span><br><span class="line">                el: &#39;#vue&#39;,</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F;data: 属性</span><br><span class="line">                &#x2F;&#x2F;data()方法</span><br><span class="line">                data()&#123;</span><br><span class="line">                    return&#123;</span><br><span class="line">                        info: &#123;</span><br><span class="line">                            name: null,</span><br><span class="line">                            address: &#123;</span><br><span class="line">                                street: null,</span><br><span class="line">                                city: null,</span><br><span class="line">                                country: null</span><br><span class="line">                            &#125;,</span><br><span class="line">                            url: null</span><br><span class="line"></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                mounted()&#123;&#x2F;&#x2F;钩子函数 链式编程</span><br><span class="line">                    axios.get(&#39;..&#x2F;data.json&#39;).then(response&#x3D;&gt;(this.info&#x3D;response.data));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;)</span><br><span class="line">        &lt;&#x2F;script&gt;</span><br><span class="line">    &lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>说明:</p>
+<ol>
+<li>在这里使用了 v-bind 将 a:href 的属性值与 Vue 实例中的数据进行绑定</li>
+<li>使用 axios 框架的 get 方法请求 AJAX 并自动将数据封装进了 Vue 实例的数据对象中</li>
+<li>咱们在data中的数据结构必需要和Ajax响应回来的数据格式匹配！</li>
+</ol>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -471,46 +577,30 @@
       </tags>
   </entry>
   <entry>
-    <title>第一篇博客，作为自己博客记录的开头吧！</title>
-    <url>/HChan-X.github.io/2020/12/13/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%EF%BC%8C%E4%BD%9C%E4%B8%BA%E8%87%AA%E5%B7%B1%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95%E7%9A%84%E5%BC%80%E5%A4%B4%E5%90%A7%EF%BC%81/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
-<p>从严格意义上来讲呢，这是我的第一篇博客！</p>
-<p>从上大学接触<code>HelloWorld</code>的那一刻开始，就开启了和代码打交到的旅程了；至今天是我在这趟旅途的第两个半的年头，回想起走过的这一段旅途，缺少了奋发向上的风景。一遇到难题就是想着如何去逃避，不敢去面对，松散的过着本该是充满活力的生活；从这一篇博客开始，将踏上新的旅程。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/background/7.jpg"></p>
-<h1 id="为什么想要写博客"><a href="#为什么想要写博客" class="headerlink" title="为什么想要写博客"></a>为什么想要写博客</h1><hr>
-<p>这个想法源于我的室友，我了解到写博客能将自己的所见所想所学，以字面的形式记录下来，可以使现在，更是以后的自己有机会审视到自己的成长，从而从中取得更为长足的进步。好处很多，但是主要的还是：</p>
+    <title>Vue笔记：第一个Vue程序(上)</title>
+    <url>/HChan-X.github.io/2021/02/07/vue01/</url>
+    <content><![CDATA[<h1 id="第一个Vue程序"><a href="#第一个Vue程序" class="headerlink" title="第一个Vue程序"></a>第一个Vue程序</h1><h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><p>  Vue (读音/vju/, 类似于view)是一套用于<strong>构建用户界面的渐进式框架</strong>，发布于2014年2月。与其它大型框架不同的是，Vue被设计为可以自底向上逐层应用。Vue的核心库只关注视图层，不仅易于上手，还便于与第三方库(如: vue-router, vue-resource, vuex)或既有项目整合。</p>
+<h2 id="MVVM模式的实现者"><a href="#MVVM模式的实现者" class="headerlink" title="MVVM模式的实现者"></a>MVVM模式的实现者</h2><p>●Model:模型层，在这里表示JavaScript对象<br>●View:视图层,在这里表示DOM (HTML操作的元素)<br>●ViewModel:连接视图和数据的中间件，Vue.js就是MVVM中的ViewModel层的实现者<br>在MVVM架构中，是不允许数据和视图直接通信的，只能通过ViewModel来通信，而<br>ViewModel就是定义了一个Observer观察者<br>●ViewModel能够观察到数据的变化，并对视图对应的内容进行更新<br>●ViewModel能够监听到视图的变化，并能够通知数据发生改变<br><strong>综上，Vue.js 就是一个MVVM的实现者，他的核心就是实现了DOM监听与数据绑定</strong></p>
+<h2 id="为什么要使用Vue-js"><a href="#为什么要使用Vue-js" class="headerlink" title="为什么要使用Vue.js"></a>为什么要使用Vue.js</h2><p>●轻量级，体积小是一个重要指标。Vue.js 压缩后有只有20多kb (Angular 压缩后56kb+ ,<br>React压缩后44kb+ )<br>●移动优先。更适合移动端，比如移动端的Touch事件<br>●易上手，学习曲线平稳,文档齐全<br><strong>●吸取了Angular (模块化)和React (虚拟DOM)的长处，并拥有自己独特的功能，如:计算属性</strong><br>●开源，社区活跃度高</p>
+<hr>
+<h2 id="什么是MVVM？"><a href="#什么是MVVM？" class="headerlink" title="什么是MVVM？"></a>什么是MVVM？</h2><p><strong>MVVM</strong> 是Model-View-ViewModel（模型-视图-视图模型） 的缩写，是一种基于前端开发的架构模式，其<strong>核心是提供对View 和 ViewModel 的双向数据绑定，这使得ViewModel 的状态改变可以自动传递给 View，即所谓的数据双向绑定</strong>。</p>
 <ul>
-<li><h3 id="可以作为一个学习记录"><a href="#可以作为一个学习记录" class="headerlink" title="可以作为一个学习记录"></a><strong>可以作为一个学习记录</strong></h3><p>很多时候我们花了很多时间找了N多教程才解决一个问题，当时可能对于这个问题已经看的明明白白的了，在接下来的一小段时间遇到同样的问题，还是能够清楚如何去解决的，但是过了很久很久之后再次遇到同样的问题，这时我们就可能会发现这个问题变成了一个全新的问题。写博客可以作为一个学习记录，而且还能用于复习。</p>
-</li>
+<li>Model：代表数据模型，数据和业务逻辑都在Model层中定义</li>
+<li>View：代表UI视图，负责数据显示</li>
+<li>ViewModel：负责监听Model中数据的改变并且控制视图的更新</li>
 </ul>
-<ul>
-<li><h3 id="促进自己学习"><a href="#促进自己学习" class="headerlink" title="促进自己学习"></a><strong>促进自己学习</strong></h3><p>当我们开始写博客之后，就会把写一篇有用的博客这件事放在一件比较重要的位置，而写有用博客的前提是有一定的知识技术储备，如果没有知识和技术，就没法去写好一篇好的博客，在这个原因的驱动下，我们会去学更多的东西，来丰富自己的知识面。</p>
-</li>
-<li><h3 id="和别人一同分享交流"><a href="#和别人一同分享交流" class="headerlink" title="和别人一同分享交流"></a><strong>和别人一同分享交流</strong></h3><p>相信很多学生（包括我）在学程序的时候，遇到技术难题的第一个反应就是上网找解决方案，但是我们会发现，很多都是源于CSDN或者是博客园上的博主，他们之所以会想那一篇文章，也是因为他们也遇到同样的问题，而他们把问题的解决方案通过博客分享给了其他人，相信他们的目的是同别人一同分享就交流，一起进步。</p>
-</li>
-</ul>
-<h1 id="最后，分享一波鸡汤"><a href="#最后，分享一波鸡汤" class="headerlink" title="最后，分享一波鸡汤"></a>最后，分享一波鸡汤</h1><hr>
-<blockquote>
-<p><strong>人生的价值，即以其人对于当代所做的工作为尺度。——徐伟</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>人生最大的光荣，不在于永不失败，而在于能屡仆屡起。——拿破仑</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>坚强的信念能赢得强者的心，并使他们变得更加坚强。——白哲特</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>勿问成功的秘诀为何，且尽全力做你应该做的事吧。——美划钠</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>只有把抱怨环境的心情，化为上进的力量，才是成功的保证。——罗曼·罗兰</strong></p>
-</blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/background/8.jpg"></p>
+<p>它有两个方向：一是将【模型】转化成【视图】，即将后端传递的数据转化成所看到的页面。实现的方式是：数据绑定。二是将【视图】转化成【模型】，即将所看到的页面转化成后端的数据。实现的方式是：DOM 事件监听。</p>
+<p><strong>总结：</strong> <strong>MVVM模式简化了界面与业务的依赖，解决了数据频繁更新。MVVM 在使用当中，利用双向绑定技术，使得 Model 变化时，ViewModel 会自动更新，而 ViewModel 变化时，View 也会自动变化。</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/mvvm.jpg"></p>
+<h2 id="为什么要使用MVVM？"><a href="#为什么要使用MVVM？" class="headerlink" title="为什么要使用MVVM？"></a>为什么要使用MVVM？</h2><p>MVVM模式和MVC模式一样，主要目的是<strong>分离视图(View)\</strong>和**模型(Model)**,有几大好处<br>●低耦合:视图(View)可以独立于Model变化和修改,一个ViewModel可以绑定到不同的<br>View上，当View变化的时候Model可以不变，当Model变化的时候View也可以不变。<br>●可复用:你可以把一些视图逻辑放在一个ViewModel里面，让很多View重用这段视图逻辑。<br>●独立开发:开发人员可以专注于业务逻辑和数据的开发(ViewModel),设计人员可以专注于页面设计。<br>●可测试:界面素来是比较难于测试的，而现在测试可以针对ViewModel来写。</p>
 ]]></content>
       <categories>
-        <category>日常</category>
-        <category>记录</category>
+        <category>笔记</category>
+        <category>Vue</category>
       </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
   </entry>
   <entry>
     <title>Vue笔记：实战练习</title>
@@ -644,6 +734,48 @@
       <tags>
         <tag>Vue</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>第一篇博客，作为自己博客记录的开头吧！</title>
+    <url>/HChan-X.github.io/2020/12/13/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%EF%BC%8C%E4%BD%9C%E4%B8%BA%E8%87%AA%E5%B7%B1%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95%E7%9A%84%E5%BC%80%E5%A4%B4%E5%90%A7%EF%BC%81/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
+<p>从严格意义上来讲呢，这是我的第一篇博客！</p>
+<p>从上大学接触<code>HelloWorld</code>的那一刻开始，就开启了和代码打交到的旅程了；至今天是我在这趟旅途的第两个半的年头，回想起走过的这一段旅途，缺少了奋发向上的风景。一遇到难题就是想着如何去逃避，不敢去面对，松散的过着本该是充满活力的生活；从这一篇博客开始，将踏上新的旅程。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/background/7.jpg"></p>
+<h1 id="为什么想要写博客"><a href="#为什么想要写博客" class="headerlink" title="为什么想要写博客"></a>为什么想要写博客</h1><hr>
+<p>这个想法源于我的室友，我了解到写博客能将自己的所见所想所学，以字面的形式记录下来，可以使现在，更是以后的自己有机会审视到自己的成长，从而从中取得更为长足的进步。好处很多，但是主要的还是：</p>
+<ul>
+<li><h3 id="可以作为一个学习记录"><a href="#可以作为一个学习记录" class="headerlink" title="可以作为一个学习记录"></a><strong>可以作为一个学习记录</strong></h3><p>很多时候我们花了很多时间找了N多教程才解决一个问题，当时可能对于这个问题已经看的明明白白的了，在接下来的一小段时间遇到同样的问题，还是能够清楚如何去解决的，但是过了很久很久之后再次遇到同样的问题，这时我们就可能会发现这个问题变成了一个全新的问题。写博客可以作为一个学习记录，而且还能用于复习。</p>
+</li>
+</ul>
+<ul>
+<li><h3 id="促进自己学习"><a href="#促进自己学习" class="headerlink" title="促进自己学习"></a><strong>促进自己学习</strong></h3><p>当我们开始写博客之后，就会把写一篇有用的博客这件事放在一件比较重要的位置，而写有用博客的前提是有一定的知识技术储备，如果没有知识和技术，就没法去写好一篇好的博客，在这个原因的驱动下，我们会去学更多的东西，来丰富自己的知识面。</p>
+</li>
+<li><h3 id="和别人一同分享交流"><a href="#和别人一同分享交流" class="headerlink" title="和别人一同分享交流"></a><strong>和别人一同分享交流</strong></h3><p>相信很多学生（包括我）在学程序的时候，遇到技术难题的第一个反应就是上网找解决方案，但是我们会发现，很多都是源于CSDN或者是博客园上的博主，他们之所以会想那一篇文章，也是因为他们也遇到同样的问题，而他们把问题的解决方案通过博客分享给了其他人，相信他们的目的是同别人一同分享就交流，一起进步。</p>
+</li>
+</ul>
+<h1 id="最后，分享一波鸡汤"><a href="#最后，分享一波鸡汤" class="headerlink" title="最后，分享一波鸡汤"></a>最后，分享一波鸡汤</h1><hr>
+<blockquote>
+<p><strong>人生的价值，即以其人对于当代所做的工作为尺度。——徐伟</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>人生最大的光荣，不在于永不失败，而在于能屡仆屡起。——拿破仑</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>坚强的信念能赢得强者的心，并使他们变得更加坚强。——白哲特</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>勿问成功的秘诀为何，且尽全力做你应该做的事吧。——美划钠</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>只有把抱怨环境的心情，化为上进的力量，才是成功的保证。——罗曼·罗兰</strong></p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/background/8.jpg"></p>
+]]></content>
+      <categories>
+        <category>日常</category>
+        <category>记录</category>
+      </categories>
   </entry>
   <entry>
     <title>SpringCloud笔记：工程建造</title>
