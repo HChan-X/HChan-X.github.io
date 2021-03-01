@@ -44,8 +44,10 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomerZkController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String INVOKE_URL=<span class="string">&quot;http://cloud-provider-service&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/customer/payment/zk&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">paymentInfo</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String result = restTemplate.getForObject(INVOKE_URL + <span class="string">&quot;/payment/zk&quot;</span>,String.class);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>关于 zookeeper 的集群搭建，目前使用较少，而且在 yml 文件中的配置也是类似，以列表形式写入 zookeeper 的多个地址即可，而且zookeeper 集群，在 hadoop的笔记中也有记录。总而言之，只要配合zookeeper集群，以及yml文件的配置就能完成集群搭建,。</p>
-<p>**问题:**zookeeper中的节点是持久还是临时的？</p>
+<blockquote>
+<p>问题:zookeeper中的节点是持久还是临时的？</p>
 <p><strong>答</strong>：临时的。</p>
+</blockquote>
 <h2 id="Consul"><a href="#Consul" class="headerlink" title="Consul"></a>Consul</h2><blockquote>
 <p><strong>Consul是什么</strong></p>
 <p>Consul是一个服务网格（微服务间的 TCP/IP，负责服务之间的网络调用、限流、熔断和监控）解决方案，它是一个一个分布式的，高度可用的系统，而且开发使用都很简便。它提供了一个功能齐全的控制平面，主要特点是：服务发现、健康检查、键值存储、安全服务通信、多数据中心。</p>
@@ -71,7 +73,8 @@
 <p>主启动类：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentMain8006</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(PaymentMain8006.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>controller也简单</p>
+<p>controller也是简单</p>
+<p>controller层：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;server.port&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String serverPort;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/payment/consul&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">paymentConsul</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;springcloud with consul: &quot;</span>+serverPort+<span class="string">&quot;\t&quot;</span>+ UUID.randomUUID().toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="消费者-1"><a href="#消费者-1" class="headerlink" title="消费者"></a>消费者</h3><blockquote>
@@ -151,6 +154,134 @@
 ]]></content>
   </entry>
   <entry>
+    <title>SpringCloud笔记：服务调用</title>
+    <url>/HChan-X.github.io/2021/03/01/cloud4/</url>
+    <content><![CDATA[<h1 id="服务调用"><a href="#服务调用" class="headerlink" title="服务调用"></a>服务调用</h1><blockquote>
+<p>都是使用在 client端，即有 ”消费者“ 需求的模块中。</p>
+</blockquote>
+<h2 id="Ribbon"><a href="#Ribbon" class="headerlink" title="Ribbon"></a>Ribbon</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><strong>Spring Cloud Ribbon是基于 Netflix Ribbon实现的一套客户端</strong>一一<font color='red'><strong>负载均衡的工具</strong></font>。</p>
+<p><strong>简单的说, Ribbon是Netflix发布的开源项目,主要功能是提供<font color='red'>客户端的软件负载均衡算法和服务调用</font>。 Ribbon客户端组件提供一系列完善的配置项如连接超时,重试等。简单的说,就是在配置文件中列出Load Balancer(筒称LB)后面所有的机器, Ribbon会自动的帮助你基于某种规则(如简单轮询,随机连接等)去连接这些机器。我们很容易使用Ribbon实现自定义的负载均衡算法。</strong></p>
+<p><font color='blue'><strong>LB负载均衡(Load Balance)是什么</strong></font><br><strong>简单的说就是将用户的请求平摊的分配到多个服务上,从而达到系统的HA(高可用)。</strong><br><strong>常见的负载均衡有软件Nginx,LVS,硬件F5等。</strong></p>
+<p><font color='blue'><strong>Ribbon本地负载均衡客户端 VS Nginx服务端负载均衡区别</strong></font><br><strong>Nginx是服务器负载均衡,客户端所有请求都会交给nginx,然后由nginx实现转发请求。即负载均衡是由服务端实现的。</strong></p>
+<p><strong>Ribbon本地负载均衡,在调用微服务接口时候,会在注册中心上获取注册信息服务列表之后缓存到JVM本地,从而在本地实现RPC远程服务调用技术。</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/Ribbon/rb1.png"></p>
+<blockquote>
+<p><strong>Ribbon在工作时分成两步</strong><br><strong>第一步先选择 Eurekaserver,它优先选择在同一个区域内负载较少的server。</strong><br><strong>第二步再根据用户指定的策略，在从server取到的服务注册列表中选择一个地址。</strong><br><strong>其中Ribbon提供了多种策略:比如轮询、随机和根据响应时间加权。</strong></p>
+</blockquote>
+<p>上面在eureka时，确实实现了负载均衡机制，那是因为 eureka-client包里面自带着ribbon：</p>
+<blockquote>
+<p>一句话，Ribbon 就是 负载均衡 + RestTemplate 调用。实际上不止eureka的jar包有，zookeeper的jar包，还有consul的jar包都包含了他，就是上面使用的服务调用。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/Ribbon/rb2.png"></p>
+<p>如果自己添加，在 模块的 pom 文件中引入：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-ribbon<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>对于RestTemplate 的一些说明：</p>
+<blockquote>
+<p>有两种请求方式：post和get ,还有两种返回类型：object 和 Entity </p>
+<p>例如<br><code>getForObject</code>返回对象为响应体中数据转化为的对象，基本上可以理解为Json<br><code>getForEntity</code>返回对象为ResponseEntity对象，包含了响应中的一些重要信息，比如响应头、响应状态码、响应体等</p>
+<p>RestTemplate 的 <code>ForEntity</code> 相比 <code>ForObject</code>特殊的地方:</p>
+<p>就是 如果使用 ForObject 得到的就是提供者返回的对象，而如果要使用 ForEntity 得到时 ResponstEntity对象，使用getBody()才能得到提供者返回的数据。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/Ribbon/rb3.png"></p>
+</blockquote>
+<h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><p><strong>Ribbon 负载均衡规则类型：</strong></p>
+<blockquote>
+<ul>
+<li><strong>com.netflix.loadbalancer.RoundRobinRule: 轮询</strong></li>
+<li><strong>com.netflix.loadbalancer.RandomRule: 随机</strong></li>
+<li><strong>com.netflix.loadbalancer.RetryRule: 先按照RoundRobinRule的策略获取服务,如果获取服务失败则在指定时间内会进行重试,获取可用的服务</strong></li>
+<li><strong>WeightedResponseTimeRule: 对RoundRobinRule的扩展,响应速度越快的实例选择权重越大,越容易被选择</strong></li>
+<li><strong>BestAvailableRule: 先过滤掉由于多次访问故障而处于断路器跳闻状态的服务,然后选择一个并发量最小的服务</strong></li>
+<li><strong>AvailabilityFilteringRule: 先过滤掉故障实例,再选择并发较小的实例</strong></li>
+<li><strong>ZoneAvoidanceRule: 默认规则,复合判断server所在区域的性能和server的可用性选择服务器</strong></li>
+</ul>
+</blockquote>
+<p>配置负载均衡规则：</p>
+<blockquote>
+<p><font color='blue'><strong>官方文档明确给出了警告:</strong></font></p>
+<p><strong>这个自定义配置类</strong><font color='red'><strong>不能放在@ComponentScan所扫描的当前包下以及子包下,</strong></font> </p>
+<p><strong>否则我们自定义的这个配置类就会被所有的Ribbon客户端所共享,达不到特殊化定制的目的了。</strong></p>
+<p><strong>注意上面说的，而Springboot主启动类上的 @SpringBootApplication 注解，相当于加了@ComponentScan注解，会自动扫描当前包及子包，所以注意不要放在SpringBoot主启动类的包内。</strong></p>
+</blockquote>
+<p>创建包：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/Ribbon/rb4.png"></p>
+<p>在这个包下新建 MySelfRule类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xhc.myrule;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.netflix.loadbalancer.IRule;</span><br><span class="line"><span class="keyword">import</span> com.netflix.loadbalancer.RandomRule;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> xhc</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2021/3/1 10:04</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MySelfRule</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IRule <span class="title">myRule</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RandomRule();<span class="comment">//负载均衡规则定义为随机</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后在主启动类上添加如下注解 @RibbonClient：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xhc.springcloud;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dkf.myrule.MySelfRule;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.client.discovery.EnableDiscoveryClient;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.netflix.eureka.EnableEurekaClient;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.netflix.ribbon.RibbonClient;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableEurekaClient</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line">	   <span class="comment">//指定该负载均衡规则对哪个提供者服务使用    加载自定义规则的配置类</span></span><br><span class="line"><span class="meta">@RibbonClient(name=&quot;CLOUD-PROVIDER-SERVICE&quot;, configuration = MySelfRule.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderMain80</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        SpringApplication.run(OrderMain80.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="轮询算法原理"><a href="#轮询算法原理" class="headerlink" title="轮询算法原理"></a>轮询算法原理</h3><p><font color='red'><strong>负载均衡算法:rest接口第几次请求数 % 服务器集群总数量=实际调用服务器位置下标,毎次服务重启动后rest接口计数从1开始。</strong></font></p>
+<p><code>List&lt;ServiceInstance&gt; instances= discoveryClient.getInstances(&quot;CLOUD-PAYMENT-SERVICE&quot;);</code></p>
+<p>如： <strong><em>List[0] instances = 127.0.0.1:8002</em></strong><br>         <strong><em>List[1] instances = 127.0.0.1:8001</em></strong></p>
+<p> <strong>8001+8002组合成为集群,它们共计2台机器,集群总数为2,按照轮询算法原理：</strong><br> <strong>当总请求数为1时:1 % 2 = 1对应下标位置为1,则获得服务地址为127.0.0.1:8001</strong><br> <strong>当总请求数位2时:2 % 2 = 0对应下标位置为0,则获得服务地址为127.0.0.1:8002</strong><br> <strong>当总请求数位3时:3 % 2 = 1对应下标位置为1,则获得服务地址为127.0.0.1:8001</strong><br> <strong>当总请求数位4时:4 % 2 = 0对应下标位置为0,则获得服务地址为127.0.0.1:8002</strong><br> <strong>如此类推….</strong></p>
+<p><strong>ribbon部分源码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">incrementAndGetModulo</span><span class="params">(<span class="keyword">int</span> modulo)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> current;</span><br><span class="line">    <span class="keyword">int</span> next;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        current = <span class="keyword">this</span>.nextServerCyclicCounter.get();</span><br><span class="line">        next = (current + <span class="number">1</span>) % modulo;</span><br><span class="line">    &#125; <span class="keyword">while</span>(!<span class="keyword">this</span>.nextServerCyclicCounter.compareAndSet(current, next));</span><br><span class="line">	<span class="keyword">return</span> next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>手写一个负载的算法:CAS+自旋锁</strong></p>
+<p>首先8001、8002服务controller层加上</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/payment/lb&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getPaymentLB</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> SERVER_PORT;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>LoadBalancer接口:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xhc.springcloud.lb;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.client.ServiceInstance;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">LoadBalancer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">ServiceInstance <span class="title">instances</span><span class="params">(List&lt;ServiceInstance&gt; serviceInstances)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xhc.springcloud.lb;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.client.ServiceInstance;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicInteger;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> xhc</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2021/3/1 11:13</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyLB</span> <span class="keyword">implements</span> <span class="title">LoadBalancer</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> AtomicInteger atomicInteger = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getAndIncrement</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> current;</span><br><span class="line">        <span class="keyword">int</span> next;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            current=<span class="keyword">this</span>.atomicInteger.get();</span><br><span class="line">            next = current &gt;= <span class="number">2147483647</span> ? <span class="number">0</span> : current+<span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">while</span> (!<span class="keyword">this</span>.atomicInteger.compareAndSet(current,next));</span><br><span class="line">        System.out.println(<span class="string">&quot;*******第几次访问，次数next:&quot;</span>+next);</span><br><span class="line">        <span class="keyword">return</span> next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServiceInstance <span class="title">instances</span><span class="params">(List&lt;ServiceInstance&gt; serviceInstances)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index = getAndIncrement() % serviceInstances.size();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> serviceInstances.get(index);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>controller类中添加:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/consumer/payment/lb&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getPaymentLB</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;ServiceInstance&gt; instances = discoveryClient.getInstances(<span class="string">&quot;CLOUD-PAYMENT-SERVICE&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(instances == <span class="keyword">null</span> || instances.size() &lt;=<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ServiceInstance serviceInstance=loadBalancer.instances(instances);</span><br><span class="line">    URI uri = serviceInstance.getUri();</span><br><span class="line">    <span class="keyword">return</span> restTemplate.getForObject(uri+<span class="string">&quot;/payment/lb&quot;</span>,String.class);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="OpenFeign"><a href="#OpenFeign" class="headerlink" title="OpenFeign"></a>OpenFeign</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><blockquote>
+<p>这里和之前学的dubbo很像，例如消费者的controller 可以调用提供者的 service层方法，但是不一样，它貌似只能调用提供者的 controller，即写一个提供者项目的controller的接口，消费者来调用这个接口方法，就还是相当于是调用提供者的 controller ，和RestTemplate 没有本质区别。</p>
+</blockquote>
+<p><font color='blue'><strong>Feign能干什么</strong></font><br><strong>Feign旨在使编写Java Http客户端变得更容易。</strong><br><strong>前面在使用Ribbon+RestTemplate时,利用RestTemplate对http请求的封装处理,形成了一套模版化的调用方法。但是在实际开发中,由于对服务依赖的调用可能不止一处,<font color='red'>往往一个接口会被多处调用,所以通常都会针对每个微服务自行封装珰客户端类来包装这些依赖服务的调用.</font>所以,Feign在此基础上做了进一步封装,由他来帮助我们定义和实现依赖服务接口的定义。在Feigη的实现下,<font color='red'>我们只需创建一个接口并使用注解的方式来配置它(以前是Dao接口上面标注Mappe注解，现在是一个微服务接口上面标注一个Feign注解即可)</font>,即可完成对服务提供方的接口绑定,简化了使用 Spring cloud Ribbon时,自动封装服务调用客户端的开发量。</strong></p>
+<p><font color='blue'><strong>Feign集成了Ribbon</strong></font><br><strong>利用Ribbon维护了Payment的服务列表信息,并且通过轮询实现了客户端的负载均衡。而与Ribbon不同的是,<font color='red'>通过feign只需要定义服务绑定接口且以声明式的方法</font>,优雅而简单的实现了服务调用.</strong></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><blockquote>
+<p>新建一个消费者募模块。<font color=red>feign自带负载均衡配置</font>，所以不用手动配置</p>
+</blockquote>
+<p>pom ：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--OpenFeign--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span><span class="comment">&lt;!--引入自己定义的api通用包，可以使用Payment 支付 Entity--&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.xhc.springcloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cloud-api-commons<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>主启动类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableFeignClients</span>   <span class="comment">//关键注解</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomerFeignMain80</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(CustomerFeignMain80.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>新建一个service</p>
+<blockquote>
+<p>这个service还是 customer 模块的接口，和提供者没有任何关系，不需要包类名一致。它使用起来就相当于是普通的service。</p>
+<p>大致原理，对于这个service 接口，读取它某个方法的注解（GET或者POST注解不写报错），知道了请求方式和请求地址，而抽象方法，只是对于我们来讲，调用该方法时，可以进行传参等。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@FeignClient(value = &quot;CLOUD-PROVIDER-SERVICE&quot;)</span>  <span class="comment">//服务名称，要和eureka上面的一致才行</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PaymentFeignService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//这个就是provider 的controller层的方法定义。</span></span><br><span class="line">    <span class="meta">@GetMapping(value = &quot;/payment/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResult <span class="title">getPaymentById</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span>Long id)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Controller层：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//使用起来就相当于是普通的service。</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomerFeignController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> PaymentFeignService paymentFeignService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;customer/feign/payment/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResult&lt;Payment&gt; <span class="title">getPaymentById</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> paymentFeignService.getPaymentById(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="超时控制"><a href="#超时控制" class="headerlink" title="超时控制"></a>超时控制</h3><p><strong>首先来模拟feign超时</strong></p>
+<p>service层加上：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/payment/feign/timeout&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">paymentFeignTimeOut</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>Controller层加上：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/consumer/payment/feign/timeout&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">paymentFeignTimeOut</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//openFeign-ribbon,客户端默认等待一秒</span></span><br><span class="line">    <span class="keyword">return</span> paymentFeignService.paymentFeignTimeOut();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试出现访问超时错误，原因是，feign客户端默认超时时间是1秒，超时就出现异常。</strong></p>
+<p><strong>解决办法：yml配置中添加</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/Ribbon/rb5.png"></p>
+<h3 id="Openfeign日志增强"><a href="#Openfeign日志增强" class="headerlink" title="Openfeign日志增强"></a>Openfeign日志增强</h3><p><strong>openfeign提供了日志打印功能。</strong></p>
+<p><strong>Logger有四种类型：<code>NONE(默认)</code>、<code>BASIC</code>、<code>HEADERS</code>、<code>FULL</code>，通过注册Bean来设置日志记录级别</strong></p>
+<p>首先写一个config配置类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FeignConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    Logger.<span class="function">Level <span class="title">feignLoggerLevel</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// 请求和响应的头信息,请求和响应的正文及元数据</span></span><br><span class="line">        <span class="keyword">return</span> Logger.Level.FULL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在yml文件中开启日志打印配置：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">logging:</span></span><br><span class="line">  <span class="attr">level:</span></span><br><span class="line">    <span class="comment">#feign日志以什么级别监控哪个接口</span></span><br><span class="line">    <span class="attr">com.xhc.springcloud.service.PaymentFeignService:</span> <span class="string">debug</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>SpringCloud</category>
+      </categories>
+      <tags>
+        <tag>SpringCloud</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue笔记：第一个Vue程序(下)</title>
     <url>/HChan-X.github.io/2021/02/07/vue02/</url>
     <content><![CDATA[<h2 id="第一个Vue程序"><a href="#第一个Vue程序" class="headerlink" title="第一个Vue程序"></a>第一个Vue程序</h2><h4 id="Vue-js常见的使用方式有："><a href="#Vue-js常见的使用方式有：" class="headerlink" title="Vue.js常见的使用方式有："></a>Vue.js常见的使用方式有：</h4><ul>
@@ -210,20 +341,22 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue笔记：基础语法</title>
-    <url>/HChan-X.github.io/2021/02/07/vue03/</url>
-    <content><![CDATA[<h1 id="Vue基础语法学习"><a href="#Vue基础语法学习" class="headerlink" title="Vue基础语法学习"></a>Vue基础语法学习</h1><p>代码 demo2.html if else 语法</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--view 层 模板--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">&quot;ok&quot;</span>&gt;</span>yes<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else</span>&gt;</span>no<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app2&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">&quot;type===&#x27;A&#x27;&quot;</span>&gt;</span>A<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else-if</span>=<span class="string">&quot;type===&#x27;B&#x27;&quot;</span>&gt;</span>B<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else-if</span>=<span class="string">&quot;type===&#x27;D&#x27;&quot;</span>&gt;</span>D<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else</span>&gt;</span>C<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--1.导入vue.js--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">                el: <span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line">                data: &#123;</span><br><span class="line"><span class="javascript">                    ok: <span class="literal">true</span>,</span></span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> vm2 = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">                el: <span class="string">&quot;#app2&quot;</span>,</span></span><br><span class="line">                data: &#123;</span><br><span class="line"><span class="javascript">                    type: <span class="string">&#x27;A&#x27;</span></span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>代码 demo3.html for循环获取数据</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--view 层 模板--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;item in items&quot;</span>&gt;</span></span><br><span class="line">                &#123;&#123;item.message&#125;&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--1.导入vue.js--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">                el:<span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line">                data: &#123;</span><br><span class="line">                    items: [</span><br><span class="line"><span class="javascript">                        &#123;<span class="attr">message</span>: <span class="string">&#x27;java&#x27;</span>&#125;,</span></span><br><span class="line"><span class="javascript">                        &#123;<span class="attr">message</span>: <span class="string">&#x27;python&#x27;</span>&#125;</span></span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>注：</strong><code>items</code> 是数组，<code>item</code>是数组元素迭代的别名。</p>
-<p>代码 demo4.html 事件绑定</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--view 层 模板--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">&quot;sayHi&quot;</span>&gt;</span>click me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--1.导入vue.js--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">                el:<span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line">                data: &#123;</span><br><span class="line"><span class="javascript">                    message: <span class="string">&quot;java&quot;</span></span></span><br><span class="line">                &#125;,</span><br><span class="line"><span class="javascript">                methods: &#123;<span class="comment">// 方法必须定义在Vue的Method对象中 通过v-on来绑定事件</span></span></span><br><span class="line"><span class="javascript">                    sayHi: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                        alert(<span class="built_in">this</span>.message);</span></span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><code>v-on</code> 监听事件</p>
-<p>事件有Vue的事件、和前端页面自己的一些事件！这里的<code>click</code>是vue的事件，能够绑定到Vue中的<code>methods</code>中的方法事件！</p>
+    <title>Vue笔记：第一个Vue程序(上)</title>
+    <url>/HChan-X.github.io/2021/02/07/vue01/</url>
+    <content><![CDATA[<h1 id="第一个Vue程序"><a href="#第一个Vue程序" class="headerlink" title="第一个Vue程序"></a>第一个Vue程序</h1><h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><p>  Vue (读音/vju/, 类似于view)是一套用于<strong>构建用户界面的渐进式框架</strong>，发布于2014年2月。与其它大型框架不同的是，Vue被设计为可以自底向上逐层应用。Vue的核心库只关注视图层，不仅易于上手，还便于与第三方库(如: vue-router, vue-resource, vuex)或既有项目整合。</p>
+<h2 id="MVVM模式的实现者"><a href="#MVVM模式的实现者" class="headerlink" title="MVVM模式的实现者"></a>MVVM模式的实现者</h2><p>●Model:模型层，在这里表示JavaScript对象<br>●View:视图层,在这里表示DOM (HTML操作的元素)<br>●ViewModel:连接视图和数据的中间件，Vue.js就是MVVM中的ViewModel层的实现者<br>在MVVM架构中，是不允许数据和视图直接通信的，只能通过ViewModel来通信，而<br>ViewModel就是定义了一个Observer观察者<br>●ViewModel能够观察到数据的变化，并对视图对应的内容进行更新<br>●ViewModel能够监听到视图的变化，并能够通知数据发生改变<br><strong>综上，Vue.js 就是一个MVVM的实现者，他的核心就是实现了DOM监听与数据绑定</strong></p>
+<h2 id="为什么要使用Vue-js"><a href="#为什么要使用Vue-js" class="headerlink" title="为什么要使用Vue.js"></a>为什么要使用Vue.js</h2><p>●轻量级，体积小是一个重要指标。Vue.js 压缩后有只有20多kb (Angular 压缩后56kb+ ,<br>React压缩后44kb+ )<br>●移动优先。更适合移动端，比如移动端的Touch事件<br>●易上手，学习曲线平稳,文档齐全<br><strong>●吸取了Angular (模块化)和React (虚拟DOM)的长处，并拥有自己独特的功能，如:计算属性</strong><br>●开源，社区活跃度高</p>
+<hr>
+<h2 id="什么是MVVM？"><a href="#什么是MVVM？" class="headerlink" title="什么是MVVM？"></a>什么是MVVM？</h2><p><strong>MVVM</strong> 是Model-View-ViewModel（模型-视图-视图模型） 的缩写，是一种基于前端开发的架构模式，其<strong>核心是提供对View 和 ViewModel 的双向数据绑定，这使得ViewModel 的状态改变可以自动传递给 View，即所谓的数据双向绑定</strong>。</p>
+<ul>
+<li>Model：代表数据模型，数据和业务逻辑都在Model层中定义</li>
+<li>View：代表UI视图，负责数据显示</li>
+<li>ViewModel：负责监听Model中数据的改变并且控制视图的更新</li>
+</ul>
+<p>它有两个方向：一是将【模型】转化成【视图】，即将后端传递的数据转化成所看到的页面。实现的方式是：数据绑定。二是将【视图】转化成【模型】，即将所看到的页面转化成后端的数据。实现的方式是：DOM 事件监听。</p>
+<p><strong>总结：</strong> <strong>MVVM模式简化了界面与业务的依赖，解决了数据频繁更新。MVVM 在使用当中，利用双向绑定技术，使得 Model 变化时，ViewModel 会自动更新，而 ViewModel 变化时，View 也会自动变化。</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/mvvm.jpg"></p>
+<h2 id="为什么要使用MVVM？"><a href="#为什么要使用MVVM？" class="headerlink" title="为什么要使用MVVM？"></a>为什么要使用MVVM？</h2><p>MVVM模式和MVC模式一样，主要目的是<strong>分离视图(View)\</strong>和**模型(Model)**,有几大好处<br>●低耦合:视图(View)可以独立于Model变化和修改,一个ViewModel可以绑定到不同的<br>View上，当View变化的时候Model可以不变，当Model变化的时候View也可以不变。<br>●可复用:你可以把一些视图逻辑放在一个ViewModel里面，让很多View重用这段视图逻辑。<br>●独立开发:开发人员可以专注于业务逻辑和数据的开发(ViewModel),设计人员可以专注于页面设计。<br>●可测试:界面素来是比较难于测试的，而现在测试可以针对ViewModel来写。</p>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -241,6 +374,30 @@
 <h2 id="在表单中使用双向数据绑定"><a href="#在表单中使用双向数据绑定" class="headerlink" title="在表单中使用双向数据绑定"></a>在表单中使用双向数据绑定</h2><p> 你可以用v-model 指令在表单 、 及 元素上创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。尽管有些神奇，但v-model本质上不过是语法糖。它负责监听户的输入事件以更新数据，并对一些极端场景进行一些特殊处理。<br>代码 demo5.html 当输入框输入相应文字 在后面提示框会输入相同文字</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--view 层 模板--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">           输入的文本： <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;message&quot;</span>&gt;</span>&#123;&#123;message&#125;&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--1.导入vue.js--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">                el:<span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line">                data: &#123;</span><br><span class="line"><span class="javascript">                    message: <span class="string">&quot;123&quot;</span></span></span><br><span class="line">                &#125;</span><br><span class="line">              </span><br><span class="line">            &#125;);</span><br><span class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue笔记：基础语法</title>
+    <url>/HChan-X.github.io/2021/02/07/vue03/</url>
+    <content><![CDATA[<h1 id="Vue基础语法学习"><a href="#Vue基础语法学习" class="headerlink" title="Vue基础语法学习"></a>Vue基础语法学习</h1><p>代码 demo2.html if else 语法</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--view 层 模板--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">&quot;ok&quot;</span>&gt;</span>yes<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else</span>&gt;</span>no<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app2&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">&quot;type===&#x27;A&#x27;&quot;</span>&gt;</span>A<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else-if</span>=<span class="string">&quot;type===&#x27;B&#x27;&quot;</span>&gt;</span>B<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else-if</span>=<span class="string">&quot;type===&#x27;D&#x27;&quot;</span>&gt;</span>D<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else</span>&gt;</span>C<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--1.导入vue.js--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">                el: <span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line">                data: &#123;</span><br><span class="line"><span class="javascript">                    ok: <span class="literal">true</span>,</span></span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> vm2 = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">                el: <span class="string">&quot;#app2&quot;</span>,</span></span><br><span class="line">                data: &#123;</span><br><span class="line"><span class="javascript">                    type: <span class="string">&#x27;A&#x27;</span></span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>代码 demo3.html for循环获取数据</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--view 层 模板--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;item in items&quot;</span>&gt;</span></span><br><span class="line">                &#123;&#123;item.message&#125;&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--1.导入vue.js--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">                el:<span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line">                data: &#123;</span><br><span class="line">                    items: [</span><br><span class="line"><span class="javascript">                        &#123;<span class="attr">message</span>: <span class="string">&#x27;java&#x27;</span>&#125;,</span></span><br><span class="line"><span class="javascript">                        &#123;<span class="attr">message</span>: <span class="string">&#x27;python&#x27;</span>&#125;</span></span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong><code>items</code> 是数组，<code>item</code>是数组元素迭代的别名。</p>
+<p>代码 demo4.html 事件绑定</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--view 层 模板--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">&quot;sayHi&quot;</span>&gt;</span>click me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--1.导入vue.js--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">                el:<span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line">                data: &#123;</span><br><span class="line"><span class="javascript">                    message: <span class="string">&quot;java&quot;</span></span></span><br><span class="line">                &#125;,</span><br><span class="line"><span class="javascript">                methods: &#123;<span class="comment">// 方法必须定义在Vue的Method对象中 通过v-on来绑定事件</span></span></span><br><span class="line"><span class="javascript">                    sayHi: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                        alert(<span class="built_in">this</span>.message);</span></span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>v-on</code> 监听事件</p>
+<p>事件有Vue的事件、和前端页面自己的一些事件！这里的<code>click</code>是vue的事件，能够绑定到Vue中的<code>methods</code>中的方法事件！</p>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -364,6 +521,62 @@
       </tags>
   </entry>
   <entry>
+    <title>Vue笔记：Webpack</title>
+    <url>/HChan-X.github.io/2021/02/09/vue10/</url>
+    <content><![CDATA[<h2 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h2><p>WebPack 是一款模块加载器兼打包工具，它能把各类资源，如 JS、JSX、ES6、SASS、LESS、图片等都做为模块来处理和使用。</p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装:"></a><strong>安装:</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install webpack -g</span><br><span class="line">npm install webpack-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>测试安装成功:</p>
+<ul>
+<li><code>webpack -v</code></li>
+<li><code>webpack-cli -v</code></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/webpack-v.jpg"></p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>建立 <code>webpack.config.js</code> 配置文件</p>
+<ul>
+<li>entry：入口文件，指定 WebPack 用哪一个文件做为项目的入口</li>
+<li>output：输出，指定 WebPack 把处理完成的文件放置到指定路径</li>
+<li>module：模块，用于处理各类类型的文件</li>
+<li>plugins：插件，如：热更新、代码重用等</li>
+<li>resolve：设置路径指向</li>
+<li>watch：监听，用于设置文件改动后直接打包</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    entry: <span class="string">&quot;&quot;</span>,</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: <span class="string">&quot;&quot;</span>,</span><br><span class="line">        filename: <span class="string">&quot;&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        loaders: [</span><br><span class="line">            &#123;<span class="attr">test</span>: <span class="regexp">/\.js$/</span>, loader: <span class="string">&quot;&quot;</span>&#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: &#123;&#125;,</span><br><span class="line">    resolve: &#123;&#125;,</span><br><span class="line">    watch: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>直接运行 <code>webpack</code> 命令打包</p>
+<h4 id="使用webpack"><a href="#使用webpack" class="headerlink" title="使用webpack"></a>使用webpack</h4><ol>
+<li><p>建立项目</p>
+</li>
+<li><p>建立一个名为 modules 的目录，用于放置 JS 模块等资源文件</p>
+</li>
+<li><p>在modules下建立模块文件，如 hello.js，用于编写 JS 模块相关代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//暴露一个方法:sayHi</span></span><br><span class="line"><span class="built_in">exports</span>.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">document</span>.write(<span class="string">&quot;&lt;div&gt;Hello WebPack&lt;/div&gt;&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在modules下建立一个名为 main.js 的入口文件，用于打包时设置 entry 属性</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//require 导入一个模块,就能够调用这个模块中的方法了</span></span><br><span class="line"><span class="keyword">var</span> hello = <span class="built_in">require</span>(<span class="string">&quot;./hello&quot;</span>);</span><br><span class="line">hello.sayHi();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在项目目录下建立 webpack.config.js 配置文件，使用 webpack 命令打包</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    entry: <span class="string">&quot;./modules/main.js&quot;</span>,</span><br><span class="line">    output: &#123;</span><br><span class="line">        filename: <span class="string">&quot;./js/bundle.js&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在项目目录下建立 HTML 页面，如 index.html，导入 WebPack 打包后的 JS 文件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">title</span>&gt;</span>xhc<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;dist/js/bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在IDEA控制台中直接执行webpack;若是失败的话,就使用管理员权限运行便可!</p>
+</li>
+<li><p>运行 HTML 看效果</p>
+</li>
+</ol>
+<p><strong>说明:</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 参数 --watch 用于监听变化</span></span><br><span class="line">webpack --watch</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue笔记：vue-cli</title>
     <url>/HChan-X.github.io/2021/02/09/vue09/</url>
     <content><![CDATA[<h2 id="vue-cli"><a href="#vue-cli" class="headerlink" title="vue-cli"></a>vue-cli</h2><p> vue-cli 官方提供的一个脚手架,用于快速生成一个 vue 的项目模板;<br> 有着预先定义好的目录结构及基础代码，就好比在创建 Maven 项目时可以选择模板创建一个骨架项目，这个骨架项目就是脚手架,使我们的开发更加的快速;<br>主要的功能:</p>
@@ -478,62 +691,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue笔记：Webpack</title>
-    <url>/HChan-X.github.io/2021/02/09/vue10/</url>
-    <content><![CDATA[<h2 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h2><p>WebPack 是一款模块加载器兼打包工具，它能把各类资源，如 JS、JSX、ES6、SASS、LESS、图片等都做为模块来处理和使用。</p>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装:"></a><strong>安装:</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install webpack -g</span><br><span class="line">npm install webpack-cli -g</span><br></pre></td></tr></table></figure>
-
-<p>测试安装成功:</p>
-<ul>
-<li><code>webpack -v</code></li>
-<li><code>webpack-cli -v</code></li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/webpack-v.jpg"></p>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>建立 <code>webpack.config.js</code> 配置文件</p>
-<ul>
-<li>entry：入口文件，指定 WebPack 用哪一个文件做为项目的入口</li>
-<li>output：输出，指定 WebPack 把处理完成的文件放置到指定路径</li>
-<li>module：模块，用于处理各类类型的文件</li>
-<li>plugins：插件，如：热更新、代码重用等</li>
-<li>resolve：设置路径指向</li>
-<li>watch：监听，用于设置文件改动后直接打包</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    entry: <span class="string">&quot;&quot;</span>,</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: <span class="string">&quot;&quot;</span>,</span><br><span class="line">        filename: <span class="string">&quot;&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        loaders: [</span><br><span class="line">            &#123;<span class="attr">test</span>: <span class="regexp">/\.js$/</span>, loader: <span class="string">&quot;&quot;</span>&#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: &#123;&#125;,</span><br><span class="line">    resolve: &#123;&#125;,</span><br><span class="line">    watch: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>直接运行 <code>webpack</code> 命令打包</p>
-<h4 id="使用webpack"><a href="#使用webpack" class="headerlink" title="使用webpack"></a>使用webpack</h4><ol>
-<li><p>建立项目</p>
-</li>
-<li><p>建立一个名为 modules 的目录，用于放置 JS 模块等资源文件</p>
-</li>
-<li><p>在modules下建立模块文件，如 hello.js，用于编写 JS 模块相关代码</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//暴露一个方法:sayHi</span></span><br><span class="line"><span class="built_in">exports</span>.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">document</span>.write(<span class="string">&quot;&lt;div&gt;Hello WebPack&lt;/div&gt;&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在modules下建立一个名为 main.js 的入口文件，用于打包时设置 entry 属性</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//require 导入一个模块,就能够调用这个模块中的方法了</span></span><br><span class="line"><span class="keyword">var</span> hello = <span class="built_in">require</span>(<span class="string">&quot;./hello&quot;</span>);</span><br><span class="line">hello.sayHi();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在项目目录下建立 webpack.config.js 配置文件，使用 webpack 命令打包</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    entry: <span class="string">&quot;./modules/main.js&quot;</span>,</span><br><span class="line">    output: &#123;</span><br><span class="line">        filename: <span class="string">&quot;./js/bundle.js&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在项目目录下建立 HTML 页面，如 index.html，导入 WebPack 打包后的 JS 文件</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">title</span>&gt;</span>xhc<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;dist/js/bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在IDEA控制台中直接执行webpack;若是失败的话,就使用管理员权限运行便可!</p>
-</li>
-<li><p>运行 HTML 看效果</p>
-</li>
-</ol>
-<p><strong>说明:</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 参数 --watch 用于监听变化</span></span><br><span class="line">webpack --watch</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>Vue</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue笔记：vue-router路由</title>
     <url>/HChan-X.github.io/2021/02/09/vue11/</url>
     <content><![CDATA[<h2 id="vue-router路由"><a href="#vue-router路由" class="headerlink" title="vue-router路由"></a>vue-router路由</h2><p>Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌。包含的功能有：</p>
@@ -577,30 +734,46 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue笔记：第一个Vue程序(上)</title>
-    <url>/HChan-X.github.io/2021/02/07/vue01/</url>
-    <content><![CDATA[<h1 id="第一个Vue程序"><a href="#第一个Vue程序" class="headerlink" title="第一个Vue程序"></a>第一个Vue程序</h1><h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><p>  Vue (读音/vju/, 类似于view)是一套用于<strong>构建用户界面的渐进式框架</strong>，发布于2014年2月。与其它大型框架不同的是，Vue被设计为可以自底向上逐层应用。Vue的核心库只关注视图层，不仅易于上手，还便于与第三方库(如: vue-router, vue-resource, vuex)或既有项目整合。</p>
-<h2 id="MVVM模式的实现者"><a href="#MVVM模式的实现者" class="headerlink" title="MVVM模式的实现者"></a>MVVM模式的实现者</h2><p>●Model:模型层，在这里表示JavaScript对象<br>●View:视图层,在这里表示DOM (HTML操作的元素)<br>●ViewModel:连接视图和数据的中间件，Vue.js就是MVVM中的ViewModel层的实现者<br>在MVVM架构中，是不允许数据和视图直接通信的，只能通过ViewModel来通信，而<br>ViewModel就是定义了一个Observer观察者<br>●ViewModel能够观察到数据的变化，并对视图对应的内容进行更新<br>●ViewModel能够监听到视图的变化，并能够通知数据发生改变<br><strong>综上，Vue.js 就是一个MVVM的实现者，他的核心就是实现了DOM监听与数据绑定</strong></p>
-<h2 id="为什么要使用Vue-js"><a href="#为什么要使用Vue-js" class="headerlink" title="为什么要使用Vue.js"></a>为什么要使用Vue.js</h2><p>●轻量级，体积小是一个重要指标。Vue.js 压缩后有只有20多kb (Angular 压缩后56kb+ ,<br>React压缩后44kb+ )<br>●移动优先。更适合移动端，比如移动端的Touch事件<br>●易上手，学习曲线平稳,文档齐全<br><strong>●吸取了Angular (模块化)和React (虚拟DOM)的长处，并拥有自己独特的功能，如:计算属性</strong><br>●开源，社区活跃度高</p>
-<hr>
-<h2 id="什么是MVVM？"><a href="#什么是MVVM？" class="headerlink" title="什么是MVVM？"></a>什么是MVVM？</h2><p><strong>MVVM</strong> 是Model-View-ViewModel（模型-视图-视图模型） 的缩写，是一种基于前端开发的架构模式，其<strong>核心是提供对View 和 ViewModel 的双向数据绑定，这使得ViewModel 的状态改变可以自动传递给 View，即所谓的数据双向绑定</strong>。</p>
+    <title>第一篇博客，作为自己博客记录的开头吧！</title>
+    <url>/HChan-X.github.io/2020/12/13/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%EF%BC%8C%E4%BD%9C%E4%B8%BA%E8%87%AA%E5%B7%B1%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95%E7%9A%84%E5%BC%80%E5%A4%B4%E5%90%A7%EF%BC%81/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
+<p>从严格意义上来讲呢，这是我的第一篇博客！</p>
+<p>从上大学接触<code>HelloWorld</code>的那一刻开始，就开启了和代码打交到的旅程了；至今天是我在这趟旅途的第两个半的年头，回想起走过的这一段旅途，缺少了奋发向上的风景。一遇到难题就是想着如何去逃避，不敢去面对，松散的过着本该是充满活力的生活；从这一篇博客开始，将踏上新的旅程。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/background/7.jpg"></p>
+<h1 id="为什么想要写博客"><a href="#为什么想要写博客" class="headerlink" title="为什么想要写博客"></a>为什么想要写博客</h1><hr>
+<p>这个想法源于我的室友，我了解到写博客能将自己的所见所想所学，以字面的形式记录下来，可以使现在，更是以后的自己有机会审视到自己的成长，从而从中取得更为长足的进步。好处很多，但是主要的还是：</p>
 <ul>
-<li>Model：代表数据模型，数据和业务逻辑都在Model层中定义</li>
-<li>View：代表UI视图，负责数据显示</li>
-<li>ViewModel：负责监听Model中数据的改变并且控制视图的更新</li>
+<li><h3 id="可以作为一个学习记录"><a href="#可以作为一个学习记录" class="headerlink" title="可以作为一个学习记录"></a><strong>可以作为一个学习记录</strong></h3><p>很多时候我们花了很多时间找了N多教程才解决一个问题，当时可能对于这个问题已经看的明明白白的了，在接下来的一小段时间遇到同样的问题，还是能够清楚如何去解决的，但是过了很久很久之后再次遇到同样的问题，这时我们就可能会发现这个问题变成了一个全新的问题。写博客可以作为一个学习记录，而且还能用于复习。</p>
+</li>
 </ul>
-<p>它有两个方向：一是将【模型】转化成【视图】，即将后端传递的数据转化成所看到的页面。实现的方式是：数据绑定。二是将【视图】转化成【模型】，即将所看到的页面转化成后端的数据。实现的方式是：DOM 事件监听。</p>
-<p><strong>总结：</strong> <strong>MVVM模式简化了界面与业务的依赖，解决了数据频繁更新。MVVM 在使用当中，利用双向绑定技术，使得 Model 变化时，ViewModel 会自动更新，而 ViewModel 变化时，View 也会自动变化。</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/mvvm.jpg"></p>
-<h2 id="为什么要使用MVVM？"><a href="#为什么要使用MVVM？" class="headerlink" title="为什么要使用MVVM？"></a>为什么要使用MVVM？</h2><p>MVVM模式和MVC模式一样，主要目的是<strong>分离视图(View)\</strong>和**模型(Model)**,有几大好处<br>●低耦合:视图(View)可以独立于Model变化和修改,一个ViewModel可以绑定到不同的<br>View上，当View变化的时候Model可以不变，当Model变化的时候View也可以不变。<br>●可复用:你可以把一些视图逻辑放在一个ViewModel里面，让很多View重用这段视图逻辑。<br>●独立开发:开发人员可以专注于业务逻辑和数据的开发(ViewModel),设计人员可以专注于页面设计。<br>●可测试:界面素来是比较难于测试的，而现在测试可以针对ViewModel来写。</p>
+<ul>
+<li><h3 id="促进自己学习"><a href="#促进自己学习" class="headerlink" title="促进自己学习"></a><strong>促进自己学习</strong></h3><p>当我们开始写博客之后，就会把写一篇有用的博客这件事放在一件比较重要的位置，而写有用博客的前提是有一定的知识技术储备，如果没有知识和技术，就没法去写好一篇好的博客，在这个原因的驱动下，我们会去学更多的东西，来丰富自己的知识面。</p>
+</li>
+<li><h3 id="和别人一同分享交流"><a href="#和别人一同分享交流" class="headerlink" title="和别人一同分享交流"></a><strong>和别人一同分享交流</strong></h3><p>相信很多学生（包括我）在学程序的时候，遇到技术难题的第一个反应就是上网找解决方案，但是我们会发现，很多都是源于CSDN或者是博客园上的博主，他们之所以会想那一篇文章，也是因为他们也遇到同样的问题，而他们把问题的解决方案通过博客分享给了其他人，相信他们的目的是同别人一同分享就交流，一起进步。</p>
+</li>
+</ul>
+<h1 id="最后，分享一波鸡汤"><a href="#最后，分享一波鸡汤" class="headerlink" title="最后，分享一波鸡汤"></a>最后，分享一波鸡汤</h1><hr>
+<blockquote>
+<p><strong>人生的价值，即以其人对于当代所做的工作为尺度。——徐伟</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>人生最大的光荣，不在于永不失败，而在于能屡仆屡起。——拿破仑</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>坚强的信念能赢得强者的心，并使他们变得更加坚强。——白哲特</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>勿问成功的秘诀为何，且尽全力做你应该做的事吧。——美划钠</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>只有把抱怨环境的心情，化为上进的力量，才是成功的保证。——罗曼·罗兰</strong></p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/background/8.jpg"></p>
 ]]></content>
       <categories>
-        <category>笔记</category>
-        <category>Vue</category>
+        <category>日常</category>
+        <category>记录</category>
       </categories>
-      <tags>
-        <tag>Vue</tag>
-      </tags>
   </entry>
   <entry>
     <title>Vue笔记：实战练习</title>
@@ -734,48 +907,6 @@
       <tags>
         <tag>Vue</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>第一篇博客，作为自己博客记录的开头吧！</title>
-    <url>/HChan-X.github.io/2020/12/13/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%EF%BC%8C%E4%BD%9C%E4%B8%BA%E8%87%AA%E5%B7%B1%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95%E7%9A%84%E5%BC%80%E5%A4%B4%E5%90%A7%EF%BC%81/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
-<p>从严格意义上来讲呢，这是我的第一篇博客！</p>
-<p>从上大学接触<code>HelloWorld</code>的那一刻开始，就开启了和代码打交到的旅程了；至今天是我在这趟旅途的第两个半的年头，回想起走过的这一段旅途，缺少了奋发向上的风景。一遇到难题就是想着如何去逃避，不敢去面对，松散的过着本该是充满活力的生活；从这一篇博客开始，将踏上新的旅程。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/background/7.jpg"></p>
-<h1 id="为什么想要写博客"><a href="#为什么想要写博客" class="headerlink" title="为什么想要写博客"></a>为什么想要写博客</h1><hr>
-<p>这个想法源于我的室友，我了解到写博客能将自己的所见所想所学，以字面的形式记录下来，可以使现在，更是以后的自己有机会审视到自己的成长，从而从中取得更为长足的进步。好处很多，但是主要的还是：</p>
-<ul>
-<li><h3 id="可以作为一个学习记录"><a href="#可以作为一个学习记录" class="headerlink" title="可以作为一个学习记录"></a><strong>可以作为一个学习记录</strong></h3><p>很多时候我们花了很多时间找了N多教程才解决一个问题，当时可能对于这个问题已经看的明明白白的了，在接下来的一小段时间遇到同样的问题，还是能够清楚如何去解决的，但是过了很久很久之后再次遇到同样的问题，这时我们就可能会发现这个问题变成了一个全新的问题。写博客可以作为一个学习记录，而且还能用于复习。</p>
-</li>
-</ul>
-<ul>
-<li><h3 id="促进自己学习"><a href="#促进自己学习" class="headerlink" title="促进自己学习"></a><strong>促进自己学习</strong></h3><p>当我们开始写博客之后，就会把写一篇有用的博客这件事放在一件比较重要的位置，而写有用博客的前提是有一定的知识技术储备，如果没有知识和技术，就没法去写好一篇好的博客，在这个原因的驱动下，我们会去学更多的东西，来丰富自己的知识面。</p>
-</li>
-<li><h3 id="和别人一同分享交流"><a href="#和别人一同分享交流" class="headerlink" title="和别人一同分享交流"></a><strong>和别人一同分享交流</strong></h3><p>相信很多学生（包括我）在学程序的时候，遇到技术难题的第一个反应就是上网找解决方案，但是我们会发现，很多都是源于CSDN或者是博客园上的博主，他们之所以会想那一篇文章，也是因为他们也遇到同样的问题，而他们把问题的解决方案通过博客分享给了其他人，相信他们的目的是同别人一同分享就交流，一起进步。</p>
-</li>
-</ul>
-<h1 id="最后，分享一波鸡汤"><a href="#最后，分享一波鸡汤" class="headerlink" title="最后，分享一波鸡汤"></a>最后，分享一波鸡汤</h1><hr>
-<blockquote>
-<p><strong>人生的价值，即以其人对于当代所做的工作为尺度。——徐伟</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>人生最大的光荣，不在于永不失败，而在于能屡仆屡起。——拿破仑</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>坚强的信念能赢得强者的心，并使他们变得更加坚强。——白哲特</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>勿问成功的秘诀为何，且尽全力做你应该做的事吧。——美划钠</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>只有把抱怨环境的心情，化为上进的力量，才是成功的保证。——罗曼·罗兰</strong></p>
-</blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/background/8.jpg"></p>
-]]></content>
-      <categories>
-        <category>日常</category>
-        <category>记录</category>
-      </categories>
   </entry>
   <entry>
     <title>SpringCloud笔记：工程建造</title>
