@@ -393,9 +393,7 @@
 <p><a href="https://m.wang1314.com/doc/webapp/topic/20971999.html">Spring Cloud Stream中文指导手册</a></p>
 </blockquote>
 <p><strong>设计思想</strong></p>
-<ol>
-<li>标准MQ</li>
-</ol>
+<p>​    1.标准MQ</p>
 <blockquote>
 <p> <img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/stream/stream1.jpg"></p>
 <ul>
@@ -408,9 +406,7 @@
 <blockquote>
 <p>比方说我们用到了 RabbitMQ 和 Kafka ，由于这两个消息中间件的架构上的不同，像 RabbitMQ 有 exchange， kafka 有 Topic 和 Partitions 分区，</p>
 <p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/stream/stream2.jpg"></p>
-<p>这些中间件的差异性导致我们实际项目开发给我们造成了一定的困扰，我们如果用了两个消息队列的其中一种，后面的业务需求，我想往另外一种消息队列进</p>
-<p>行迁移，这时候无疑就是一个灾难性的，一大堆东西都要重新推倒重新做，因为它跟我们的系统耦合了，这时候 springcloud Stream 给我们提供了—种解耦</p>
-<p>合的方式。</p>
+<p>这些中间件的差异性导致我们实际项目开发给我们造成了一定的困扰，我们如果用了两个消息队列的其中一种，后面的业务需求，我想往另外一种消息队列进行迁移，这时候无疑就是一个灾难性的，一大堆东西都要重新推倒重新做，因为它跟我们的系统耦合了，这时候 springcloud Stream 给我们提供了—种解耦合的方式。</p>
 </blockquote>
 <p>​    3.SpringCloud Stream屏蔽差异</p>
 <blockquote>
@@ -477,7 +473,7 @@
 <p>接收消息的业务类：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.stream.annotation.EnableBinding;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.stream.annotation.StreamListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.stream.messaging.Sink;</span><br><span class="line"><span class="keyword">import</span> org.springframework.messaging.Message;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@EnableBinding(Sink.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConsumerController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;server.port&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String serverPort;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@StreamListener(Sink.INPUT)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">(Message&lt;String&gt; message)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;消费者1号，serverport: &quot;</span> + serverPort + <span class="string">&quot;，接受到的消息：&quot;</span> + message.getPayload());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="配置分组消费"><a href="#配置分组消费" class="headerlink" title="配置分组消费"></a>配置分组消费</h3><p>新建 cloud-stream-rabbitmq-consumer8802 模块：</p>
+<h3 id="配置分组消费"><a href="#配置分组消费" class="headerlink" title="配置分组消费"></a>配置分组消费</h3><p>新建 cloud-stream-rabbitmq-consumer8803 模块：</p>
 <blockquote>
 <p>8803 就是 8802 clone出来的。</p>
 </blockquote>
