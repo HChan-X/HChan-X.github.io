@@ -533,6 +533,50 @@
       </tags>
   </entry>
   <entry>
+    <title>Vue笔记：第一个Vue程序(上)</title>
+    <url>/HChan-X.github.io/2021/02/07/vue01/</url>
+    <content><![CDATA[<h1 id="第一个Vue程序"><a href="#第一个Vue程序" class="headerlink" title="第一个Vue程序"></a>第一个Vue程序</h1><h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><p>  Vue (读音/vju/, 类似于view)是一套用于<strong>构建用户界面的渐进式框架</strong>，发布于2014年2月。与其它大型框架不同的是，Vue被设计为可以自底向上逐层应用。Vue的核心库只关注视图层，不仅易于上手，还便于与第三方库(如: vue-router, vue-resource, vuex)或既有项目整合。</p>
+<h2 id="MVVM模式的实现者"><a href="#MVVM模式的实现者" class="headerlink" title="MVVM模式的实现者"></a>MVVM模式的实现者</h2><p>●Model:模型层，在这里表示JavaScript对象<br>●View:视图层,在这里表示DOM (HTML操作的元素)<br>●ViewModel:连接视图和数据的中间件，Vue.js就是MVVM中的ViewModel层的实现者<br>在MVVM架构中，是不允许数据和视图直接通信的，只能通过ViewModel来通信，而<br>ViewModel就是定义了一个Observer观察者<br>●ViewModel能够观察到数据的变化，并对视图对应的内容进行更新<br>●ViewModel能够监听到视图的变化，并能够通知数据发生改变<br><strong>综上，Vue.js 就是一个MVVM的实现者，他的核心就是实现了DOM监听与数据绑定</strong></p>
+<h2 id="为什么要使用Vue-js"><a href="#为什么要使用Vue-js" class="headerlink" title="为什么要使用Vue.js"></a>为什么要使用Vue.js</h2><p>●轻量级，体积小是一个重要指标。Vue.js 压缩后有只有20多kb (Angular 压缩后56kb+ ,<br>React压缩后44kb+ )<br>●移动优先。更适合移动端，比如移动端的Touch事件<br>●易上手，学习曲线平稳,文档齐全<br><strong>●吸取了Angular (模块化)和React (虚拟DOM)的长处，并拥有自己独特的功能，如:计算属性</strong><br>●开源，社区活跃度高</p>
+<hr>
+<h2 id="什么是MVVM？"><a href="#什么是MVVM？" class="headerlink" title="什么是MVVM？"></a>什么是MVVM？</h2><p><strong>MVVM</strong> 是Model-View-ViewModel（模型-视图-视图模型） 的缩写，是一种基于前端开发的架构模式，其<strong>核心是提供对View 和 ViewModel 的双向数据绑定，这使得ViewModel 的状态改变可以自动传递给 View，即所谓的数据双向绑定</strong>。</p>
+<ul>
+<li>Model：代表数据模型，数据和业务逻辑都在Model层中定义</li>
+<li>View：代表UI视图，负责数据显示</li>
+<li>ViewModel：负责监听Model中数据的改变并且控制视图的更新</li>
+</ul>
+<p>它有两个方向：一是将【模型】转化成【视图】，即将后端传递的数据转化成所看到的页面。实现的方式是：数据绑定。二是将【视图】转化成【模型】，即将所看到的页面转化成后端的数据。实现的方式是：DOM 事件监听。</p>
+<p><strong>总结：</strong> <strong>MVVM模式简化了界面与业务的依赖，解决了数据频繁更新。MVVM 在使用当中，利用双向绑定技术，使得 Model 变化时，ViewModel 会自动更新，而 ViewModel 变化时，View 也会自动变化。</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/mvvm.jpg"></p>
+<h2 id="为什么要使用MVVM？"><a href="#为什么要使用MVVM？" class="headerlink" title="为什么要使用MVVM？"></a>为什么要使用MVVM？</h2><p>MVVM模式和MVC模式一样，主要目的是<strong>分离视图(View)\</strong>和**模型(Model)**,有几大好处<br>●低耦合:视图(View)可以独立于Model变化和修改,一个ViewModel可以绑定到不同的<br>View上，当View变化的时候Model可以不变，当Model变化的时候View也可以不变。<br>●可复用:你可以把一些视图逻辑放在一个ViewModel里面，让很多View重用这段视图逻辑。<br>●独立开发:开发人员可以专注于业务逻辑和数据的开发(ViewModel),设计人员可以专注于页面设计。<br>●可测试:界面素来是比较难于测试的，而现在测试可以针对ViewModel来写。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/HChan-X.github.io/2020/12/12/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>SpringCloud笔记：Sleuth</title>
     <url>/HChan-X.github.io/2021/03/21/cloud9/</url>
     <content><![CDATA[<h1 id="Sleuth"><a href="#Sleuth" class="headerlink" title="Sleuth"></a>Sleuth</h1><blockquote>
@@ -616,50 +660,6 @@
       </categories>
       <tags>
         <tag>SpringCloud</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/HChan-X.github.io/2020/12/12/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Vue笔记：第一个Vue程序(上)</title>
-    <url>/HChan-X.github.io/2021/02/07/vue01/</url>
-    <content><![CDATA[<h1 id="第一个Vue程序"><a href="#第一个Vue程序" class="headerlink" title="第一个Vue程序"></a>第一个Vue程序</h1><h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><p>  Vue (读音/vju/, 类似于view)是一套用于<strong>构建用户界面的渐进式框架</strong>，发布于2014年2月。与其它大型框架不同的是，Vue被设计为可以自底向上逐层应用。Vue的核心库只关注视图层，不仅易于上手，还便于与第三方库(如: vue-router, vue-resource, vuex)或既有项目整合。</p>
-<h2 id="MVVM模式的实现者"><a href="#MVVM模式的实现者" class="headerlink" title="MVVM模式的实现者"></a>MVVM模式的实现者</h2><p>●Model:模型层，在这里表示JavaScript对象<br>●View:视图层,在这里表示DOM (HTML操作的元素)<br>●ViewModel:连接视图和数据的中间件，Vue.js就是MVVM中的ViewModel层的实现者<br>在MVVM架构中，是不允许数据和视图直接通信的，只能通过ViewModel来通信，而<br>ViewModel就是定义了一个Observer观察者<br>●ViewModel能够观察到数据的变化，并对视图对应的内容进行更新<br>●ViewModel能够监听到视图的变化，并能够通知数据发生改变<br><strong>综上，Vue.js 就是一个MVVM的实现者，他的核心就是实现了DOM监听与数据绑定</strong></p>
-<h2 id="为什么要使用Vue-js"><a href="#为什么要使用Vue-js" class="headerlink" title="为什么要使用Vue.js"></a>为什么要使用Vue.js</h2><p>●轻量级，体积小是一个重要指标。Vue.js 压缩后有只有20多kb (Angular 压缩后56kb+ ,<br>React压缩后44kb+ )<br>●移动优先。更适合移动端，比如移动端的Touch事件<br>●易上手，学习曲线平稳,文档齐全<br><strong>●吸取了Angular (模块化)和React (虚拟DOM)的长处，并拥有自己独特的功能，如:计算属性</strong><br>●开源，社区活跃度高</p>
-<hr>
-<h2 id="什么是MVVM？"><a href="#什么是MVVM？" class="headerlink" title="什么是MVVM？"></a>什么是MVVM？</h2><p><strong>MVVM</strong> 是Model-View-ViewModel（模型-视图-视图模型） 的缩写，是一种基于前端开发的架构模式，其<strong>核心是提供对View 和 ViewModel 的双向数据绑定，这使得ViewModel 的状态改变可以自动传递给 View，即所谓的数据双向绑定</strong>。</p>
-<ul>
-<li>Model：代表数据模型，数据和业务逻辑都在Model层中定义</li>
-<li>View：代表UI视图，负责数据显示</li>
-<li>ViewModel：负责监听Model中数据的改变并且控制视图的更新</li>
-</ul>
-<p>它有两个方向：一是将【模型】转化成【视图】，即将后端传递的数据转化成所看到的页面。实现的方式是：数据绑定。二是将【视图】转化成【模型】，即将所看到的页面转化成后端的数据。实现的方式是：DOM 事件监听。</p>
-<p><strong>总结：</strong> <strong>MVVM模式简化了界面与业务的依赖，解决了数据频繁更新。MVVM 在使用当中，利用双向绑定技术，使得 Model 变化时，ViewModel 会自动更新，而 ViewModel 变化时，View 也会自动变化。</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/HChan-X/image/pictures/study/mvvm.jpg"></p>
-<h2 id="为什么要使用MVVM？"><a href="#为什么要使用MVVM？" class="headerlink" title="为什么要使用MVVM？"></a>为什么要使用MVVM？</h2><p>MVVM模式和MVC模式一样，主要目的是<strong>分离视图(View)\</strong>和**模型(Model)**,有几大好处<br>●低耦合:视图(View)可以独立于Model变化和修改,一个ViewModel可以绑定到不同的<br>View上，当View变化的时候Model可以不变，当Model变化的时候View也可以不变。<br>●可复用:你可以把一些视图逻辑放在一个ViewModel里面，让很多View重用这段视图逻辑。<br>●独立开发:开发人员可以专注于业务逻辑和数据的开发(ViewModel),设计人员可以专注于页面设计。<br>●可测试:界面素来是比较难于测试的，而现在测试可以针对ViewModel来写。</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>Vue</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
@@ -1446,6 +1446,310 @@
       </tags>
   </entry>
   <entry>
+    <title>SpringCloud笔记：Nacos-服务注册与配置中心</title>
+    <url>/HChan-X.github.io/2021/03/25/cloud10/</url>
+    <content><![CDATA[<h1 id="SpringCloud-Alibaba"><a href="#SpringCloud-Alibaba" class="headerlink" title="SpringCloud Alibaba"></a>SpringCloud Alibaba</h1><blockquote>
+<p>GITHUB ：<a href="https://github.com/alibaba/spring-cloud-alibaba/blob/master/README-zh.md">https://github.com/alibaba/spring-cloud-alibaba/blob/master/README-zh.md</a></p>
+</blockquote>
+<h2 id="大简介"><a href="#大简介" class="headerlink" title="大简介"></a>大简介</h2><ul>
+<li>能做什么</li>
+</ul>
+<blockquote>
+<ul>
+<li>服务限流降级:默认支持Servlet、Feign、RestTemplate、Dubbo和RocketMQ限流降级功能的接入，可以在运行时通过控制台</li>
+<li>实时修改限流降级规则，还支持查看限流降级Metrics监控。</li>
+<li>服务注册与发现:适配Spring Cloud服务注册与发现标准，默认集成了Ribbon的支持。</li>
+<li>分布式配置管理:支持分布式系统中的外部化配置，配置更改时自动刷新。</li>
+<li>消息驱动能力:基于Spring Cloud Stream为微服务应用构建消息驱动能力。</li>
+<li>阿里云对象存储:阿里云提供的海量、安全、低成本、高可靠的云存储服务。支持在任何应用、任何时间、任何地点存储和访问任意类型的数据。</li>
+<li>分布式任务调度:提供秒级、精准、高可靠、高可用的定时(基于Cron表达式)任务调度服务。同时提供分布式的任务执行模型，如网格任务。网格任务支持海量子任务均匀分配到所有Worker (schedulerx-client)上执行。</li>
+</ul>
+</blockquote>
+<ul>
+<li>相应的组件</li>
+</ul>
+<blockquote>
+<ul>
+<li>Sentinel：把流量作为切入点，从流量控制、熔断降级、系统负载保护等多个维度保护服务的稳定性。</li>
+<li>Nacos：一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。</li>
+<li>RocketMQ：一款开源的分布式消息系统，基于高可用分布式集群技术，提供低延时的、高可靠的消息发布与订阅服务。</li>
+<li>Dubbo：Apache Dubbo™ 是一款高性能 Java RPC 框架。</li>
+<li>Seata：阿里巴巴开源产品，一个易于使用的高性能微服务分布式事务解决方案。</li>
+<li>Alibaba Cloud ACM：一款在分布式架构环境中对应用配置进行集中管理和推送的应用配置中心产品。</li>
+<li>Alibaba Cloud OSS: 阿里云对象存储服务（Object Storage Service，简称 OSS），是阿里云提供的海量、安全、低成本、高可靠的云存储服务。您可以在任何应用、任何时间、任何地点存储和访问任意类型的数据。</li>
+<li>Alibaba Cloud SchedulerX: 阿里中间件团队开发的一款分布式任务调度产品，提供秒级、精准、高可靠、高可用的定时（基于 Cron 表达式）任务调度服务。</li>
+<li>Alibaba Cloud SMS: 覆盖全球的短信服务，友好、高效、智能的互联化通讯能力，帮助企业迅速搭建客户触达通道</li>
+</ul>
+</blockquote>
+<ul>
+<li>官网</li>
+</ul>
+<blockquote>
+<ul>
+<li>官网 ：<a href="https://spring.io/projects/spring-cloud-alibaba#overview">https://spring.io/projects/spring-cloud-alibaba#overview</a></li>
+<li>Github ：<a href="https://github.com/alibaba/spring-cloud-alibaba">https://github.com/alibaba/spring-cloud-alibaba</a></li>
+<li>中文网站 ：<a href="https://github.com/alibaba/spring-cloud-alibaba/blob/master/README-zh.md">https://github.com/alibaba/spring-cloud-alibaba/blob/master/README-zh.md</a></li>
+</ul>
+</blockquote>
+<h2 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><blockquote>
+<ul>
+<li>Github ：<a href="https://github.com/alibaba/Nacos">https://github.com/alibaba/Nacos</a></li>
+<li>官网 ：<a href="https://nacos.io/zh-cn/index.html">https://nacos.io/zh-cn/index.html</a></li>
+<li>官方文档 ：<a href="https://spring-cloud-alibaba-group.github.io/github-pages/greenwich/spring-cloud-alibaba.html#_spring_cloud_alibaba_nacos_discovery">https://spring-cloud-alibaba-group.github.io/github-pages/greenwich/spring-cloud-alibaba.html#_spring_cloud_alibaba_nacos_discovery</a></li>
+</ul>
+</blockquote>
+<h4 id="是什么？"><a href="#是什么？" class="headerlink" title="是什么？"></a>是什么？</h4><ul>
+<li>一个更易于构建云原生应用的动态服务发现，配置管理和服务管理中心</li>
+<li>Nacos就是注册中心+配置中心的组合</li>
+<li>等价于 Netflix 中的 Eureka+Config+Bus</li>
+</ul>
+<h4 id="能干嘛？"><a href="#能干嘛？" class="headerlink" title="能干嘛？"></a>能干嘛？</h4><ul>
+<li>替代 Eureka 做服务<strong>注册中心</strong></li>
+<li>替代 Config 做服务<strong>配置中心</strong></li>
+</ul>
+<h4 id="与其他注册中心的对比"><a href="#与其他注册中心的对比" class="headerlink" title="与其他注册中心的对比"></a>与其他注册中心的对比</h4><p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos7.png"></p>
+<h3 id="下载安装并运行"><a href="#下载安装并运行" class="headerlink" title="下载安装并运行"></a>下载安装并运行</h3><blockquote>
+<p>下载地址：  <a href="https://github.com/alibaba/nacos/releases/tag/1.1.4">https://github.com/alibaba/nacos/releases/tag/1.1.4</a> </p>
+<p>直接下载网址： <a href="https://github.com/alibaba/nacos/releases/download/1.1.4/nacos-server-1.1.4.zip">https://github.com/alibaba/nacos/releases/download/1.1.4/nacos-server-1.1.4.zip</a></p>
+<p>解压安装包，直接运行bin目录下的startup.cmd</p>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos1.png"></p>
+<p>命令运行成功后直接访问 <a href="http://localhost:8848/nacos">http://localhost:8848/nacos</a></p>
+<p>用户名 、密码 都是 nacos</p>
+</blockquote>
+<h3 id="服务注册发现"><a href="#服务注册发现" class="headerlink" title="服务注册发现"></a>服务注册发现</h3><h4 id="提供者"><a href="#提供者" class="headerlink" title="提供者"></a>提供者</h4><p>新建模块 cloudalibaba-provider-payment9001</p>
+<p>pom依赖：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- springcloud alibaba nacos 依赖 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- springboot整合Web组件 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">       <span class="comment">&lt;!-- 日常通用jar包 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span><span class="comment">&lt;!-- 引入自己定义的api通用包，可以使用Payment支付Entity --&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.xhc.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cloud-api-commons<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>yml 配置：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">9001</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">nacos-payment-provider</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">discovery:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="string">localhost:8848</span> <span class="comment">#配置nacos地址</span></span><br><span class="line"><span class="attr">management:</span></span><br><span class="line">  <span class="attr">endpoints:</span></span><br><span class="line">    <span class="attr">web:</span></span><br><span class="line">      <span class="attr">exposure:</span></span><br><span class="line">        <span class="attr">include:</span> <span class="string">&#x27;*&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>主启动类:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentMain9001</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(PaymentMain9001.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>controller层：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;server.port&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String serverPort;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/payment/nacos/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPayment</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span>Integer id)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;nacos registry ,serverport :&quot;</span>+serverPort+<span class="string">&quot;\t id&quot;</span>+id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<p>启动 Nacos、alibaba-provider-payment-9001</p>
+<p>查看 Nacos 界面</p>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos2.png"></p>
+<p><font color=red>Nacos 自带负载均衡机制</font>，下面创建第二个提供者。</p>
+<p>在 alibaba-provider-payment-9001 的基础上再创建一个一模一样的项目 alibaba-provider-payment-9002 ，为了搭建一个简单的集群</p>
+<ul>
+<li>如果不想创建新项目，可以使用以下方法</li>
+</ul>
+<blockquote>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos3.png"></p>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos4.png"></p>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos5.png"></p>
+</blockquote>
+<ul>
+<li>再查看 Nacos 的界面</li>
+</ul>
+<blockquote>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos6.jpg"></p>
+</blockquote>
+<h4 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h4><p>新建消费者 模块： cloudalibaba-customer-order80</p>
+<p>pom文件：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- springboot整合Web组件 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 日常通用jar包 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span><span class="comment">&lt;!-- 引入自己定义的api通用包，可以使用Payment支付Entity --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.xhc.springcloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cloud-api-commons<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>yml文件：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">83</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">nacos-order-consumer</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">discovery:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="string">localhost:8848</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#消费者将要去访问的微服务名称（注册成功进nacos的微服务提供者）</span></span><br><span class="line"><span class="attr">service-url:</span></span><br><span class="line">  <span class="attr">nacos-user-service:</span> <span class="string">http://nacos-payment-provider</span></span><br></pre></td></tr></table></figure>
+
+<p>nacos底层也是ribbon，注入ReatTemplate</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationContextConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@LoadBalanced</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RestTemplate <span class="title">getRestTemplate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>controller :</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderNacosController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> RestTemplate restTemplate;</span><br><span class="line">    <span class="comment">//在yml里面写的提供者服务路径，  值为：nacos-payment-provider</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;service-url.nacos-user-service&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String serverURL;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/consumer/payment/nacos/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">paymentInfo</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> restTemplate.getForObject(serverURL+<span class="string">&quot;/payment/nacos/&quot;</span>+id,String.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<p>启动 Nacos 控制台<br>启动 9001、9002、83</p>
+<p>访问：<a href="http://localhost:83/consumer/payment/nacos/111">http://localhost:83/consumer/payment/nacos/111</a></p>
+<p>完成！</p>
+<h4 id="各种注册中心进一步对比"><a href="#各种注册中心进一步对比" class="headerlink" title="各种注册中心进一步对比"></a>各种注册中心进一步对比</h4><ul>
+<li>前面只是简单对比了一下，下面会更深层的对比</li>
+<li><strong>Nacos全景图</strong></li>
+</ul>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos8.png"></p>
+<ul>
+<li><strong>Nacos 和 CAP</strong></li>
+</ul>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos9.png"></p>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos10.png"></p>
+<ul>
+<li><strong>Nacos支持AP和CP模式的切换</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li><p>C是所有节点在同一时间看到的数据是一致的</p>
+</li>
+<li><p>A的定义是所有的请求都会收到响应。</p>
+</li>
+<li><p>一般来说，如果不需要存储服务级别的信息且服务实例是通过nacos-client注册，并能够保持心跳上报，那么就可以选择AP模式。当前主流的服务如 Sping cloud和Dubbo服务，都适用于AP模式，AP模式为了服务的可能性而减弱了一致性，因此AP模式下只支持注册临时实例。</p>
+</li>
+<li><p>如果需要在服务级别编辑或者存储配置信息，那么CP是必须，K8S服务和DNS服务则适用于CP模式.<br>CP模式下则支持注册持久化实例，此时则是以Raft协议为集群运行模式，该模式下注册实例之前必须先注册服务，如果服务不存在，则会返回错误。</p>
+</li>
+<li><p>切换命令 ：</p>
+<p><code>curl -X PUT &#39;$NACOS_SERVER:8848/nacos/v1/ns/operator/switches?entry=serverMode&amp;value=CP&#39;</code></p>
+</li>
+</ul>
+</blockquote>
+<h3 id="配置中心"><a href="#配置中心" class="headerlink" title="配置中心"></a>配置中心</h3><h4 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h4><blockquote>
+<p>nacos 还可以作为服务配置中心，下面是案例，创建一个模块，从nacos上读取配置信息。</p>
+<p>nacos 作为配置中心，不需要像springcloud config 一样做一个Server端模块。</p>
+</blockquote>
+<p>新建模块 cloudalibaba-nacos-config3377</p>
+<p>pom依赖：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-config<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- springboot整合Web组件 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 日常通用jar包 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span><span class="comment">&lt;!-- 引入自己定义的api通用包，可以使用Payment支付Entity --&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.xhc.springcloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cloud-api-commons<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>主启动类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CloudAlibabaConfigMain3377</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(CloudAlibabaConfigMain3377.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>bootstrap.yml 配置：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">3377</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">nacos-config-client</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">discovery:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="string">localhost:8848</span>  <span class="comment"># nacos作为服务注册中心</span></span><br><span class="line">      <span class="attr">config:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="string">localhost:8848</span> <span class="comment"># nacos作为服务配置中心</span></span><br><span class="line">        <span class="attr">file-extension:</span> <span class="string">yaml</span> <span class="comment"># 指定yaml 格式的配置</span></span><br></pre></td></tr></table></figure>
+
+<p>controller 层进行读取配置测试：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RefreshScope</span>  <span class="comment">//支持nacos的动态刷新功能</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigClientController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;config.info&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String configInfo;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/config/info&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getConfigInfo</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> configInfo;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>下面在 Nacos 中添加配置文件，需要遵循如下规则：</p>
+<p>官网地址：<a href="https://nacos.io/zh-cn/docs/quick-start-spring-cloud.html">https://nacos.io/zh-cn/docs/quick-start-spring-cloud.html</a></p>
+<p>在Nacos Spring Cloud中，<code>dataId</code>的完整格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$&#123;prefix&#125;-$&#123;spring.profile.active&#125;.$&#123;file-extension&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>prefix</code> 默认为 <code>spring.application.name</code> 的值，也可以通过配置项 <code>spring.cloud.nacos.config.prefix</code>来配置。</li>
+<li><code>spring.profiles.active</code> 即为当前环境对应的 profile，详情可以参考 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-profiles.html#boot-features-profiles">Spring Boot文档</a>。 <strong>注意：当 <code>spring.profiles.active</code> 为空时，对应的连接符 <code>-</code> 也将不存在，dataId 的拼接格式变成 <code>$&#123;prefix&#125;.$&#123;file-extension&#125;</code></strong></li>
+<li><code>file-exetension</code> 为配置内容的数据格式，可以通过配置项 <code>spring.cloud.nacos.config.file-extension</code> 来配置。目前只支持 <code>properties</code> 和 <code>yaml</code> 类型。</li>
+</ul>
+</blockquote>
+<p>从上面可以看到重要的一点，配置文件的名称第二项，spring.profiles.active 是依据当前环境的profile属性值的，也就是这个值如果是 dev，即开发环境，它就会读取 dev 的配置信息，如果是test，测试环境，它就会读取test的配置信息，就是从 spring.profile.active 值获取当前应该读取哪个环境下的配置信息。</p>
+<p>所以要配置spring.profiles.active，新建application.yml文件，添加如下配置：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span></span><br><span class="line">    <span class="attr">active:</span> <span class="string">dev</span> <span class="comment"># 表示开发环境</span></span><br></pre></td></tr></table></figure>
+
+<p>综合以上说明，和下面的截图，Nacos 的dataid（类似文件名）应为： nacos-config-client-dev.yaml  (必须是yaml)</p>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos11.png"></p>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos12.png"></p>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos13.png"></p>
+<p>当修改配置值，会发现 3377 上也已经修改，Nacos自带自动刷新功能！</p>
+<h4 id="分类配置"><a href="#分类配置" class="headerlink" title="分类配置"></a>分类配置</h4><p><strong>存在的问题</strong></p>
+<ul>
+<li>问题1 ：</li>
+</ul>
+<blockquote>
+<p>实际开发中，通常─个系统会准备:</p>
+<ul>
+<li><p>dev开发环境</p>
+</li>
+<li><p>test测试环境</p>
+</li>
+<li><p>prod生产环境</p>
+</li>
+</ul>
+<p>如何保证指定环境启动时服务能正确读取到Nacos上相应环境的配置文件呢?</p>
+</blockquote>
+<ul>
+<li>问题2:</li>
+</ul>
+<blockquote>
+<p>一个大型分布式微服务系统会有很多微服务子项目，每个微服务项目又都会有相应的开发环境、测试环境、预发环境、正式环境…那怎么对这些微服务配置进行管理呢?</p>
+</blockquote>
+<p>nacos中的设计：</p>
+<blockquote>
+<p>Nacos 的 Group ,默认创建的配置文件，都是在DEFAULT_GROUP中，可以在创建配置文件时，给文件指定分组。</p>
+<p>yml 配置如下，当修改开发环境时，只会从同一group中进行切换。</p>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos14.png"></p>
+<p>Nacos 的namespace ,默认的命名空间是public ,这个是不允许删除的，可以创建一个新的命名空间，会自动给创建的命名空间一个流水号。</p>
+<p>在yml配置中，指定命名空间：</p>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos15.png"></p>
+<p>最后，dataid、group、namespace 三者关系如下：（不同的dataid，是相互独立的，不同的group是相互隔离的，不同的namespace也是相互独立的）</p>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos16.png"></p>
+</blockquote>
+<h3 id="Nacos集群和持久化"><a href="#Nacos集群和持久化" class="headerlink" title="Nacos集群和持久化"></a>Nacos集群和持久化</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><blockquote>
+<p>官方文档：<a href="https://nacos.io/zh-cn/docs/cluster-mode-quick-start.html">https://nacos.io/zh-cn/docs/cluster-mode-quick-start.html</a></p>
+</blockquote>
+<h5 id="集群架构图"><a href="#集群架构图" class="headerlink" title="集群架构图"></a>集群架构图</h5><p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos17.jpg"></p>
+<p>对上图的理解</p>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos18.png"></p>
+<h5 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h5><blockquote>
+<p>搭建集群必须持久化，不然多台机器上的nacos的配置信息不同，造成系统错乱。它不同于单个springcloud config，没有集群一说，而且数据保存在github上，也不同于eureka，配置集群就完事了，没有需要保存的配置信息。</p>
+<p>Nacos默认使用它自带的嵌入式数据库derby:</p>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos19.png"></p>
+</blockquote>
+<h4 id="Nacos持久化配置："><a href="#Nacos持久化配置：" class="headerlink" title="Nacos持久化配置："></a>Nacos持久化配置：</h4><blockquote>
+<p>在 nacos的 conf目录下，有个nacos-mysql.sql 的sql文件，创建一个名为【nacos_config】的数据库，执行里面内容，在nacos_config数据库里面创建数据表。</p>
+<p>找到conf/application.properties 文件，尾部追加如下内容：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="meta">spring.datasource.platform</span>=<span class="string">mysql</span></span><br><span class="line"></span><br><span class="line"><span class="meta">db.num</span>=<span class="string">1</span></span><br><span class="line"><span class="meta">db.url.0</span>=<span class="string">jdbc:mysql://localhost:3306/nacos_config?characterEncoding=utf-8&amp;connectTimeout=1000&amp;socketTimeout=3000&amp;autoReconnect=true</span></span><br><span class="line"><span class="meta">db.user</span>=<span class="string">root</span></span><br><span class="line"><span class="meta">db.password</span>=<span class="string">123456</span></span><br></pre></td></tr></table></figure>
+
+<p>重启nacos，即完成持久化配置。</p>
+</blockquote>
+<h4 id="Linux版Nacos-MySQL生产环境配置"><a href="#Linux版Nacos-MySQL生产环境配置" class="headerlink" title="Linux版Nacos+MySQL生产环境配置"></a>Linux版Nacos+MySQL生产环境配置</h4><blockquote>
+<p>现在进行企业中真正需要的nacos集群配置，而不是上面的单机模式，需要准备如下：</p>
+<p>一台linux虚拟机：nginx服务器，3个nacos服务，一个mysql数据库。</p>
+<p>nacos下载linux版本的 tar.gz 包：<a href="https://github.com/alibaba/nacos/releases/download/1.1.4/nacos-server-1.1.4.tar.gz">https://github.com/alibaba/nacos/releases/download/1.1.4/nacos-server-1.1.4.tar.gz</a></p>
+</blockquote>
+<p>Nacos集群配置</p>
+<p>1.首先对 nacos 进行持久化操作，操作如上面一致。</p>
+<p>2.修改 nacos/conf 下的cluster文件，最好先复制一份</p>
+<ul>
+<li><p>查看本机的IP</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hostname -i</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写 cluster.conf</p>
+<p>前缀 IP 必须为上一步查到的 IP 地址</p>
+<p>​    <img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos20.png"></p>
+</li>
+<li><p>保存退出</p>
+</li>
+</ul>
+<p>3.模拟三台nacos服务，编辑nacos的startup启动脚本，使他能够支持不同的端口启动多次。</p>
+<ul>
+<li>进入nacos/bin，找到startup.sh，最好先复制一份</li>
+<li>编辑startup.sh</li>
+</ul>
+<p>​    <img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos21.png"></p>
+<p>​    <img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos25.png"></p>
+<p>​    <img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos23.png"></p>
+<p>​    <img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos22.png"></p>
+<ul>
+<li>保存退出</li>
+</ul>
+<p>4.nginx配置负载均衡：</p>
+<ul>
+<li>进入/usr/local/nginx/conf，找到nginx.conf，最好先复制一份</li>
+<li>编辑nginx.conf</li>
+</ul>
+<p>​    <img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos24.png"></p>
+<p>-保存退出</p>
+<p>5.启动集群</p>
+<ul>
+<li><p>进入 /usr/local/nginx/sbin/目录</p>
+</li>
+<li><p>使用刚刚修改的配置文件启动 Nginx</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">./nginx -c /usr/local/nginx/conf/nginx.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入nacos/bin目录</p>
+</li>
+<li><p>启动nacos集群（3333、4444、5555）</p>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos26.png"></p>
+</li>
+</ul>
+<p>6.测试完成！</p>
+<p>使用 9002模块注册进Nacos Server 并获取它上面配置文件的信息，进行测试。</p>
+<blockquote>
+<p>小总结</p>
+<p><img src="http://image-hexo-hchan.test.upcdn.net/youpaiyun-image/study/springcloud/nacos/nacos28.png"></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>SpringCloud</category>
+      </categories>
+      <tags>
+        <tag>SpringCloud</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SpringCloud笔记：服务注册中心之Eureka</title>
     <url>/HChan-X.github.io/2021/02/28/cloud2/</url>
     <content><![CDATA[<h1 id="服务注册中心"><a href="#服务注册中心" class="headerlink" title="服务注册中心"></a>服务注册中心</h1><blockquote>
@@ -1831,7 +2135,7 @@
 <p><strong>与github整合配置：</strong></p>
 <p>由于SpringCloud Config默认使用Git来存储配置文件（也有其它方式，比如支持svn和本地文件，但最推荐的还是Git，而且使用的是http/https访问的形式）</p>
 <p>1.在github上新建一个Repository：springcloud-config</p>
-<p>2.获取新建仓库地址：<a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#46;&#99;&#111;&#109;">&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#46;&#99;&#111;&#109;</a>:XXXX/springcloud-config.git</p>
+<p>2.获取新建仓库地址：<a href="mailto:&#x67;&#x69;&#x74;&#64;&#x67;&#105;&#116;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#109;">&#x67;&#x69;&#x74;&#64;&#x67;&#105;&#116;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#109;</a>:XXXX/springcloud-config.git</p>
 <p>3.本地磁盘新建git仓库并clone</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkdir SpringCloud2020</span><br><span class="line">git clone git@github.com:XXXX&#x2F;springcloud-config.git</span><br></pre></td></tr></table></figure>
 
@@ -1844,7 +2148,7 @@
 <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">3344</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">cloud-config-center</span> <span class="comment">#注册进Eureka服务器的微服务名</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">config:</span></span><br><span class="line">      <span class="attr">server:</span></span><br><span class="line">        <span class="attr">git:</span></span><br><span class="line">          <span class="attr">uri:</span> <span class="string">https://github.com/HChan-X/springcloud-config.git</span> <span class="comment">#Github上面的git仓库名字</span></span><br><span class="line">          <span class="comment">####搜索目录</span></span><br><span class="line">          <span class="attr">search-paths:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">springcloud-config</span></span><br><span class="line">      <span class="comment">####读取分支</span></span><br><span class="line">      <span class="attr">label:</span> <span class="string">main</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://eureka7001.com:7001/eureka/</span></span><br></pre></td></tr></table></figure>
 
 <p>注意：</p>
-<p>yml中 uri: <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;</a>:HChan-X/springcloud-config.git</p>
+<p>yml中 uri: <a href="mailto:&#x67;&#x69;&#x74;&#64;&#103;&#x69;&#x74;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#109;">&#x67;&#x69;&#x74;&#64;&#103;&#x69;&#x74;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#109;</a>:HChan-X/springcloud-config.git</p>
 <p>配置远程仓库访问时会报错</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Cannot clone or checkout repository: git@github.com:HChan-X&#x2F;springcloud-config.git</span><br></pre></td></tr></table></figure>
 
